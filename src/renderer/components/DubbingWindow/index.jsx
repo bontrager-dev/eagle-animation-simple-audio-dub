@@ -438,7 +438,7 @@ const DubbingWindow = ({ t, projectId, trackId, pictures = [], fps = 12, initial
     <div className={`${style.container} ${isRecording ? style.recording : ''}`}>
       <div className={style.header}>
         <FontAwesomeIcon icon={faMicrophone} className={style.headerIcon} />
-        <span className={style.title}>{t('Audio dubbing')}</span>
+        <span>{t('Audio dubbing')}</span>
         {isRecording && <span className={style.recordBadge}>{t('Recording')}</span>}
         {isPlaying && <span className={style.playBadge}>{t('Play')}</span>}
         {inputDevices.length > 0 && (
