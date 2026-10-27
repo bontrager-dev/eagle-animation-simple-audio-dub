@@ -1,4 +1,19 @@
-import { dialog } from 'electron';
+import { dialog, shell } from 'electron';
+
+// Only web pages are handed to the system: file://, custom app schemes and the like could launch programs
+export const isWebLink = (link) => {
+  try {
+    return ['http:', 'https:'].includes(new URL(`${link}`).protocol);
+  } catch (err) {
+    return false;
+  }
+};
+
+export const openWebLink = (link) => {
+  if (isWebLink(link)) {
+    shell.openExternal(link);
+  }
+};
 
 // Timestamp
 export const time = () => Math.floor(new Date().getTime() / 1000);
