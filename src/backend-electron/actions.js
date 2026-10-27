@@ -10,7 +10,7 @@ import { CONTRIBUTE_REPOSITORY } from '../config';
 import { PROJECTS_PATH } from './config';
 import { uploadFile } from './core/api';
 import { clearCache, getCacheSize } from './core/cache';
-import { setDiscordActivity } from './core/discord';
+import { setDiscordActivity, stopDiscordActivity } from './core/discord';
 import { exportProjectScene, exportSaveTemporaryBuffer, getSyncList, saveSyncList } from './core/export';
 import { assertExtension, assertFrameIndex, assertSafeName, assertTrackId, getProjectPath } from './core/paths';
 import { createProject, deleteProject, getAudio, getProjectData, getProjectsList, projectSave, saveAudio, savePicture } from './core/projects';
@@ -203,6 +203,7 @@ const actions = {
       'LOCAL_DATA_FOLDER',
       'CLEAR_CACHE',
       'AUDIO_DUBBING',
+      'DISCORD',
     ];
     return capabilities;
   },
@@ -332,7 +333,11 @@ const actions = {
 
     return true;
   },
-  DISCORD_ACTIVITY: async (evt, { description, actionIcon, actionTitle, applicationTitle }) => {
+  DISCORD_ACTIVITY: async (evt, { enabled = false, description, actionIcon, actionTitle, applicationTitle }) => {
+    if (!enabled) {
+      stopDiscordActivity();
+      return;
+    }
     setDiscordActivity({
       details: description || null,
       smallImageKey: actionIcon || null,
