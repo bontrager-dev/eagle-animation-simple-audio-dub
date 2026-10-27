@@ -31,6 +31,7 @@ const DEFAULT_SETTINGS = {
   TOUCAN_CAMERA_SERVER_EXPOSE: false,
   // Opt-in under a new key: installs that saved the old TELEMETRY_ENABLED: true start with telemetry off too
   TELEMETRY_OPT_IN: false,
+  DISCORD_ENABLED: false, // Shows the current project on the user's Discord profile
   TOURS_COMPLETED: [], // Keys of the guided tours the user has already seen
 };
 

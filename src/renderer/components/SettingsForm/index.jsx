@@ -65,6 +65,13 @@ const SettingsForm = ({ settings = {}, onUpdate = () => {}, t }) => {
             <Switch register={register('TELEMETRY_OPT_IN')} />
           </div>
         </FormGroup>
+        {appCapabilities.includes('DISCORD') && (
+          <FormGroup label={t('Show on Discord')} description={t('Show the project you are working on, including its title, on your Discord profile')}>
+            <div>
+              <Switch register={register('DISCORD_ENABLED')} />
+            </div>
+          </FormGroup>
+        )}
         <FormGroup label={t('Update')} description={t('Stay up to date to enjoy the latest features and improvements')}>
           <Button
             size="small"
