@@ -12,6 +12,7 @@ import { uploadFile } from './core/api';
 import { clearCache, getCacheSize } from './core/cache';
 import { setDiscordActivity } from './core/discord';
 import { exportProjectScene, exportSaveTemporaryBuffer, getSyncList, saveSyncList } from './core/export';
+import { assertExtension, assertFrameIndex, assertSafeName, assertTrackId, getProjectPath } from './core/paths';
 import { createProject, deleteProject, getAudio, getProjectData, getProjectsList, projectSave, saveAudio, savePicture } from './core/projects';
 import { getCameraSettings, getSettings, saveCameraSettings, saveSettings } from './core/settings';
 import { getToucanCameraServerConfig, setToucanCameraServerConfig, stopToucanCameraServer } from './core/toucan';
@@ -89,6 +90,9 @@ const computeProject = (data) => {
   return output;
 };
 
+// Exports may only write where the user pointed the save dialog, never a path chosen by the renderer
+let selectedExportPath = null;
+
 const actions = {
   GET_LAST_VERSION: async () => {
     if (CONTRIBUTE_REPOSITORY) {
@@ -107,21 +111,21 @@ const actions = {
     return computeProject(data);
   },
   GET_PROJECT: async (evt, { project_id }) => {
-    const data = await getProjectData(join(PROJECTS_PATH, project_id));
+    const data = await getProjectData(getProjectPath(project_id));
     return computeProject(data);
   },
   DELETE_PROJECT: async (evt, { project_id }) => {
-    await deleteProject(join(PROJECTS_PATH, project_id));
+    await deleteProject(getProjectPath(project_id));
     return null;
   },
   SAVE_PROJECT: async (evt, { project_id, data = {} }) => {
-    await projectSave(join(PROJECTS_PATH, project_id), data.project, true);
-    const updatedData = await getProjectData(join(PROJECTS_PATH, project_id));
+    await projectSave(getProjectPath(project_id), data.project, true);
+    const updatedData = await getProjectData(getProjectPath(project_id));
     return computeProject(updatedData);
   },
   SAVE_PICTURE: async (evt, { project_id, track_id, buffer, extension = 'dat' }) => {
-    const data = await getProjectData(join(PROJECTS_PATH, project_id));
-    const picture = await savePicture(join(PROJECTS_PATH, project_id), track_id, extension, buffer);
+    const data = await getProjectData(getProjectPath(project_id));
+    const picture = await savePicture(getProjectPath(project_id), assertTrackId(track_id), assertExtension(extension), buffer);
     return {
       ...picture,
       link: getPictureLink(data._id, track_id, picture.filename),
@@ -129,10 +133,10 @@ const actions = {
     };
   },
   SAVE_AUDIO: async (evt, { project_id, track_id, buffer, extension = 'wav' }) => {
-    return saveAudio(join(PROJECTS_PATH, project_id), track_id, extension, buffer);
+    return saveAudio(getProjectPath(project_id), track_id, extension, buffer);
   },
   GET_AUDIO: async (evt, { project_id, track_id, filename }) => {
-    return getAudio(join(PROJECTS_PATH, project_id), track_id, filename);
+    return getAudio(getProjectPath(project_id), track_id, filename);
   },
   OPEN_LINK: async (evt, { link }) => {
     shell.openExternal(link);
@@ -224,17 +228,18 @@ const actions = {
       },
     }
   ) => {
+    selectedExportPath = null;
     if (type === 'FOLDER') {
-      return selectFolder(translations.EXPORT_FRAMES);
+      selectedExportPath = await selectFolder(translations.EXPORT_FRAMES);
     }
     if (type === 'FILE') {
       const profile = getEncodingProfile(format);
-      return selectFile(translations.DEFAULT_FILE_NAME, profile.extension, translations.EXPORT_VIDEO, translations.EXT_NAME);
+      selectedExportPath = await selectFile(translations.DEFAULT_FILE_NAME, profile.extension, translations.EXPORT_VIDEO, translations.EXT_NAME);
     }
-    return null;
+    return selectedExportPath;
   },
   EXPORT_BUFFER: async (evt, { project_id, buffer_id, buffer }) => {
-    await exportSaveTemporaryBuffer(join(PROJECTS_PATH, project_id), buffer_id, buffer);
+    await exportSaveTemporaryBuffer(getProjectPath(project_id), buffer_id, buffer);
   },
   EXPORT: async (
     evt,
@@ -257,13 +262,22 @@ const actions = {
     },
     sendToRenderer
   ) => {
+    if (mode !== 'send' && (!output_path || output_path !== selectedExportPath)) {
+      throw new Error('EXPORT_PATH_NOT_SELECTED');
+    }
+    selectedExportPath = null;
+
     if (mode === 'frames') {
       if (output_path) {
-        const project = await getProjectData(join(PROJECTS_PATH, project_id));
+        const project = await getProjectData(getProjectPath(project_id));
         const scenePrefix = getScenePrefix(project.project.scenes, Number(track_id));
-        const bufferDirectoryPath = join(join(PROJECTS_PATH, project_id), `/.tmp/`);
+        const bufferDirectoryPath = join(getProjectPath(project_id), `/.tmp/`);
         for (const frame of frames) {
-          await copyFile(join(bufferDirectoryPath, frame.buffer_id), join(output_path, `${scenePrefix}_${frame.index.toString().padStart(6, '0')}${FRAME_TYPES[frame.type]}.${frame.extension}`));
+          if (!Object.hasOwn(FRAME_TYPES, frame.type)) {
+            throw new Error('INVALID_FRAME_TYPE');
+          }
+          const fileName = `${scenePrefix}_${assertFrameIndex(frame.index).toString().padStart(6, '0')}${FRAME_TYPES[frame.type]}.${assertExtension(frame.extension)}`;
+          await copyFile(join(bufferDirectoryPath, assertSafeName(frame.buffer_id, 'BUFFER_ID')), join(output_path, fileName));
         }
       }
       return true;
@@ -279,7 +293,7 @@ const actions = {
     const fileId = randomUUID();
     const path = mode === 'send' ? join(PROJECTS_PATH, '/.sync/', `${fileId}.${profile.extension}`) : output_path;
     await exportProjectScene(
-      join(PROJECTS_PATH, project_id),
+      getProjectPath(project_id),
       track_id,
       frames,
       path,

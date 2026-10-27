@@ -8,6 +8,7 @@ import sharp from 'sharp';
 
 import { parseResizeArguments } from '../../common/resizer';
 import { PROJECTS_PATH, RESIZER_CACHE_PATH } from '../config';
+import { isInsideFolder } from './paths';
 
 // Bump this when the resize pipeline changes: entries cached by a previous
 // version are then ignored instead of serving a stale render.
@@ -92,6 +93,10 @@ export const ImageRoute = async (request) => {
   // Get disk path
   const filePath = request.url.slice('ea://api/pictures/'.length).split('?')[0];
   const diskPath = `${PROJECTS_PATH}/${filePath}`;
+  // URL parsing already drops "..", this does not rely on it
+  if (!isInsideFolder(PROJECTS_PATH, diskPath)) {
+    return new Response(null, { status: 403 });
+  }
 
   // Options
   const args = parseResizeArguments(urlObj.searchParams);
