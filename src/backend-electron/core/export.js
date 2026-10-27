@@ -8,12 +8,13 @@ import { v4 as uuidv4 } from 'uuid';
 import { getFFmpegArgs, parseFFmpegLogs } from '../../common/ffmpeg';
 import { PARTNER_API } from '../config';
 import { ffmpeg } from './ffmpeg';
+import { assertExtension, assertFrameIndex, assertSafeName } from './paths';
 import { getProjectData } from './projects';
 
 export const exportSaveTemporaryBuffer = async (projectPath, bufferId, buffer) => {
   const directoryPath = join(projectPath, `/.tmp/`);
   await mkdirp(directoryPath);
-  await writeFile(join(directoryPath, bufferId), buffer);
+  await writeFile(join(directoryPath, assertSafeName(bufferId, 'BUFFER_ID')), buffer);
 };
 
 export const exportProjectScene = async (projectPath, scene, frames, filePath, format, opts = {}, onProgress = () => {}) => {
@@ -22,10 +23,11 @@ export const exportProjectScene = async (projectPath, scene, frames, filePath, f
   const bufferDirectoryPath = join(projectPath, `/.tmp/`);
   await mkdirp(directoryPath);
   for (const frame of frames) {
-    await copyFile(join(bufferDirectoryPath, frame.buffer_id), join(directoryPath, `frame-${frame.index.toString().padStart(6, '0')}.${frame.extension}`));
+    const fileName = `frame-${assertFrameIndex(frame.index).toString().padStart(6, '0')}.${assertExtension(frame.extension)}`;
+    await copyFile(join(bufferDirectoryPath, assertSafeName(frame.buffer_id, 'BUFFER_ID')), join(directoryPath, fileName));
   }
   if (opts.audioBufferId) {
-    await copyFile(join(bufferDirectoryPath, opts.audioBufferId), join(directoryPath, 'audio.wav'));
+    await copyFile(join(bufferDirectoryPath, assertSafeName(opts.audioBufferId, 'BUFFER_ID')), join(directoryPath, 'audio.wav'));
   }
 
   const fps = opts?.framerate || project.project.scenes[scene].framerate;
