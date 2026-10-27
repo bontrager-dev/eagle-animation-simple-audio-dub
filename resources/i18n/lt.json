@@ -514,5 +514,7 @@
   "Open audio dubbing": "Atidaryti įgarsinimą",
   "Microphone": "Mikrofonas",
   "Microphone {{index}}": "Mikrofonas {{index}}",
-  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Rodyklės: judėti (laikykite, kad tęstų) • Laikykite Enter: įrašyti • Tarpas: leisti • Z: anuliuoti"
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Rodyklės: judėti (laikykite, kad tęstų) • Laikykite Enter: įrašyti • Tarpas: leisti • Z: anuliuoti",
+  "Show on Discord": "Rodyti „Discord“",
+  "Show the project you are working on, including its title, on your Discord profile": "Rodyti projektą, su kuriuo dirbate, įskaitant jo pavadinimą, jūsų „Discord“ profilyje"
 }

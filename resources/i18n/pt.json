@@ -506,5 +506,7 @@
   "Open audio dubbing": "Abrir a dobragem de áudio",
   "Microphone": "Microfone",
   "Microphone {{index}}": "Microfone {{index}}",
-  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Setas: mover (manter premido para continuar) • Manter Enter: gravar • Espaço: reproduzir • Z: desfazer"
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Setas: mover (manter premido para continuar) • Manter Enter: gravar • Espaço: reproduzir • Z: desfazer",
+  "Show on Discord": "Mostrar no Discord",
+  "Show the project you are working on, including its title, on your Discord profile": "Mostrar o projeto em que estás a trabalhar, incluindo o título, no teu perfil do Discord"
 }

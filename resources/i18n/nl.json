@@ -489,5 +489,7 @@
   "Open audio dubbing": "Audio inspreken openen",
   "Microphone": "Microfoon",
   "Microphone {{index}}": "Microfoon {{index}}",
-  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Pijlen: verplaatsen (ingedrukt houden om door te gaan) • Enter ingedrukt houden: opnemen • Spatie: afspelen • Z: ongedaan maken"
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Pijlen: verplaatsen (ingedrukt houden om door te gaan) • Enter ingedrukt houden: opnemen • Spatie: afspelen • Z: ongedaan maken",
+  "Show on Discord": "Tonen op Discord",
+  "Show the project you are working on, including its title, on your Discord profile": "Toon het project waaraan je werkt, inclusief de titel, op je Discord-profiel"
 }

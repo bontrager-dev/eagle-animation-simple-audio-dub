@@ -489,5 +489,7 @@
   "Open audio dubbing": "Άνοιγμα ηχογράφησης φωνής",
   "Microphone": "Μικρόφωνο",
   "Microphone {{index}}": "Μικρόφωνο {{index}}",
-  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Βέλη: μετακίνηση (κρατήστε για συνέχεια) • Κρατήστε το Enter: ηχογράφηση • Διάστημα: αναπαραγωγή • Z: αναίρεση"
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Βέλη: μετακίνηση (κρατήστε για συνέχεια) • Κρατήστε το Enter: ηχογράφηση • Διάστημα: αναπαραγωγή • Z: αναίρεση",
+  "Show on Discord": "Εμφάνιση στο Discord",
+  "Show the project you are working on, including its title, on your Discord profile": "Εμφάνιση του έργου στο οποίο εργάζεστε, μαζί με τον τίτλο του, στο προφίλ σας στο Discord"
 }

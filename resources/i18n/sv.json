@@ -489,5 +489,7 @@
   "Open audio dubbing": "Öppna ljudinspelning",
   "Microphone": "Mikrofon",
   "Microphone {{index}}": "Mikrofon {{index}}",
-  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Pilar: flytta (håll ned för att fortsätta) • Håll ned Enter: spela in • Mellanslag: spela upp • Z: ångra"
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Pilar: flytta (håll ned för att fortsätta) • Håll ned Enter: spela in • Mellanslag: spela upp • Z: ångra",
+  "Show on Discord": "Visa på Discord",
+  "Show the project you are working on, including its title, on your Discord profile": "Visa projektet du arbetar med, inklusive dess titel, på din Discord-profil"
 }

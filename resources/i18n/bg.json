@@ -489,5 +489,7 @@
   "Open audio dubbing": "Отвори озвучаването",
   "Microphone": "Микрофон",
   "Microphone {{index}}": "Микрофон {{index}}",
-  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Стрелки: преместване (задръжте за продължаване) • Задръжте Enter: запис • Интервал: пускане • Z: отмяна"
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Стрелки: преместване (задръжте за продължаване) • Задръжте Enter: запис • Интервал: пускане • Z: отмяна",
+  "Show on Discord": "Показване в Discord",
+  "Show the project you are working on, including its title, on your Discord profile": "Показвай проекта, по който работите, включително заглавието му, в профила ви в Discord"
 }
