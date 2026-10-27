@@ -132,11 +132,15 @@ const actions = {
       metaLink: getMetaPictureLink(data._id, track_id, picture.filename),
     };
   },
-  SAVE_AUDIO: async (evt, { project_id, track_id, buffer, extension = 'wav' }) => {
-    return saveAudio(getProjectPath(project_id), track_id, extension, buffer);
+  // Takes are always WAV; the renderer does not get to choose the file type
+  SAVE_AUDIO: async (evt, { project_id, track_id, buffer }) => {
+    return saveAudio(getProjectPath(project_id), assertTrackId(track_id), 'wav', buffer);
   },
   GET_AUDIO: async (evt, { project_id, track_id, filename }) => {
-    return getAudio(getProjectPath(project_id), track_id, filename);
+    if (!/\.wav$/i.test(assertSafeName(filename, 'FILENAME'))) {
+      throw new Error('INVALID_FILENAME');
+    }
+    return getAudio(getProjectPath(project_id), assertTrackId(track_id), filename);
   },
   OPEN_LINK: async (evt, { link }) => {
     shell.openExternal(link);
