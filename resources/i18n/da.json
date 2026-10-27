@@ -475,5 +475,17 @@
   "Expose the cameras so they can be used from other devices ({{hostname}}:{{port}}, using {{token}})": "Gør kameraerne tilgængelige, så de kan bruges fra andre enheder ({{hostname}}:{{port}}, med {{token}})",
   "Auto": "Auto",
   "Automatic rotation": "Automatisk rotation",
-  "Rotation": "Rotation"
+  "Rotation": "Rotation",
+  "Audio dubbing": "Lydindspilning",
+  "The recording could not be saved": "Optagelsen kunne ikke gemmes",
+  "Take some pictures before recording sound": "Tag nogle billeder, før du optager lyd",
+  "Recording": "Optager",
+  "Microphone level": "Mikrofonniveau",
+  "Frame {{current}} / {{total}}": "Billede {{current}} / {{total}}",
+  "Shown for {{duration}} s": "Vises i {{duration}} s",
+  "Microphone unavailable, only the timing will be recorded": "Mikrofonen er ikke tilgængelig, kun timingen bliver optaget",
+  "Hold to record": "Hold nede for at optage",
+  "Undo": "Fortryd",
+  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Pile: flyt • Hold Mellemrum: optag • Enter: afspil • Z: fortryd",
+  "Open audio dubbing": "Åbn lydindspilning"
 }

@@ -475,5 +475,17 @@
   "Expose the cameras so they can be used from other devices ({{hostname}}:{{port}}, using {{token}})": "Gör kamerorna tillgängliga så att de kan användas från andra enheter ({{hostname}}:{{port}}, med {{token}})",
   "Auto": "Auto",
   "Automatic rotation": "Automatisk rotation",
-  "Rotation": "Rotation"
+  "Rotation": "Rotation",
+  "Audio dubbing": "Ljudinspelning",
+  "The recording could not be saved": "Inspelningen kunde inte sparas",
+  "Take some pictures before recording sound": "Ta några bilder innan du spelar in ljud",
+  "Recording": "Spelar in",
+  "Microphone level": "Mikrofonnivå",
+  "Frame {{current}} / {{total}}": "Bildruta {{current}} / {{total}}",
+  "Shown for {{duration}} s": "Visas i {{duration}} s",
+  "Microphone unavailable, only the timing will be recorded": "Mikrofonen är inte tillgänglig, bara tidtagningen spelas in",
+  "Hold to record": "Håll ned för att spela in",
+  "Undo": "Ångra",
+  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Pilar: flytta • Håll ned Mellanslag: spela in • Enter: spela upp • Z: ångra",
+  "Open audio dubbing": "Öppna ljudinspelning"
 }

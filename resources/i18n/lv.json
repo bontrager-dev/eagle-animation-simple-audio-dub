@@ -479,5 +479,17 @@
   "Expose the cameras so they can be used from other devices ({{hostname}}:{{port}}, using {{token}})": "Padara kameras pieejamas, lai tās varētu izmantot no citām ierīcēm ({{hostname}}:{{port}}, izmantojot {{token}})",
   "Auto": "Auto",
   "Automatic rotation": "Automātiska pagriešana",
-  "Rotation": "Pagriešana"
+  "Rotation": "Pagriešana",
+  "Audio dubbing": "Ieskaņošana",
+  "The recording could not be saved": "Ierakstu neizdevās saglabāt",
+  "Take some pictures before recording sound": "Pirms skaņas ierakstīšanas uzņemiet dažas fotogrāfijas",
+  "Recording": "Ieraksta",
+  "Microphone level": "Mikrofona līmenis",
+  "Frame {{current}} / {{total}}": "Kadrs {{current}} / {{total}}",
+  "Shown for {{duration}} s": "Rāda {{duration}} s",
+  "Microphone unavailable, only the timing will be recorded": "Mikrofons nav pieejams, tiks ierakstīts tikai laiks",
+  "Hold to record": "Turiet, lai ierakstītu",
+  "Undo": "Atsaukt",
+  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Bultiņas: pārvietot • Turiet atstarpi: ierakstīt • Enter: atskaņot • Z: atsaukt",
+  "Open audio dubbing": "Atvērt ieskaņošanu"
 }

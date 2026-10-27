@@ -482,5 +482,17 @@
   "Expose the cameras so they can be used from other devices ({{hostname}}:{{port}}, using {{token}})": "Zpřístupní kamery, aby je bylo možné používat z jiných zařízení ({{hostname}}:{{port}}, pomocí {{token}})",
   "Auto": "Auto",
   "Automatic rotation": "Automatické otočení",
-  "Rotation": "Otočení"
+  "Rotation": "Otočení",
+  "Audio dubbing": "Nahrávání zvuku",
+  "The recording could not be saved": "Nahrávku se nepodařilo uložit",
+  "Take some pictures before recording sound": "Před nahráváním zvuku pořiďte několik snímků",
+  "Recording": "Nahrávání",
+  "Microphone level": "Úroveň mikrofonu",
+  "Frame {{current}} / {{total}}": "Snímek {{current}} / {{total}}",
+  "Shown for {{duration}} s": "Zobrazeno {{duration}} s",
+  "Microphone unavailable, only the timing will be recorded": "Mikrofon není k dispozici, zaznamená se pouze časování",
+  "Hold to record": "Podržením nahrávejte",
+  "Undo": "Zpět",
+  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Šipky: posun • Podržte mezerník: nahrávání • Enter: přehrát • Z: zpět",
+  "Open audio dubbing": "Otevřít nahrávání zvuku"
 }

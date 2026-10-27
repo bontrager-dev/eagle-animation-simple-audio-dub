@@ -479,5 +479,17 @@
   "Expose the cameras so they can be used from other devices ({{hostname}}:{{port}}, using {{token}})": "Expune camerele pentru a putea fi folosite de pe alte dispozitive ({{hostname}}:{{port}}, folosind {{token}})",
   "Auto": "Auto",
   "Automatic rotation": "Rotire automată",
-  "Rotation": "Rotire"
+  "Rotation": "Rotire",
+  "Audio dubbing": "Dublaj audio",
+  "The recording could not be saved": "Înregistrarea nu a putut fi salvată",
+  "Take some pictures before recording sound": "Fă câteva fotografii înainte de a înregistra sunet",
+  "Recording": "Se înregistrează",
+  "Microphone level": "Nivelul microfonului",
+  "Frame {{current}} / {{total}}": "Cadru {{current}} / {{total}}",
+  "Shown for {{duration}} s": "Afișat timp de {{duration}} s",
+  "Microphone unavailable, only the timing will be recorded": "Microfon indisponibil, se va înregistra doar sincronizarea",
+  "Hold to record": "Ține apăsat pentru a înregistra",
+  "Undo": "Anulează",
+  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Săgeți: mutare • Ține apăsat Spațiu: înregistrare • Enter: redare • Z: anulare",
+  "Open audio dubbing": "Deschide dublajul audio"
 }

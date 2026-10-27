@@ -475,5 +475,17 @@
   "Expose the cameras so they can be used from other devices ({{hostname}}:{{port}}, using {{token}})": "Asettaa kamerat saataville, jotta niitä voi käyttää muilta laitteilta ({{hostname}}:{{port}}, tunnuksella {{token}})",
   "Auto": "Auto",
   "Automatic rotation": "Automaattinen kierto",
-  "Rotation": "Kierto"
+  "Rotation": "Kierto",
+  "Audio dubbing": "Äänitys",
+  "The recording could not be saved": "Äänitystä ei voitu tallentaa",
+  "Take some pictures before recording sound": "Ota muutama kuva ennen äänen tallentamista",
+  "Recording": "Tallennetaan",
+  "Microphone level": "Mikrofonin taso",
+  "Frame {{current}} / {{total}}": "Ruutu {{current}} / {{total}}",
+  "Shown for {{duration}} s": "Näytetään {{duration}} s",
+  "Microphone unavailable, only the timing will be recorded": "Mikrofoni ei ole käytettävissä, vain ajoitus tallennetaan",
+  "Hold to record": "Pidä painettuna tallentaaksesi",
+  "Undo": "Kumoa",
+  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Nuolet: siirrä • Pidä välilyöntiä: tallenna • Enter: toista • Z: kumoa",
+  "Open audio dubbing": "Avaa äänitys"
 }
