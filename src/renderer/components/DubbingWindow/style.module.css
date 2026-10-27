@@ -1,0 +1,198 @@
+.container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-medium);
+  height: calc(100vh - 3px - var(--safe-area-top));
+  padding: var(--space-medium) var(--space-huge) var(--space-big);
+}
+
+.header {
+  align-items: center;
+  color: var(--color-white);
+  display: flex;
+  font-size: var(--font-size-3);
+  font-weight: 600;
+  gap: var(--space-medium);
+  min-height: 1.5rem;
+}
+
+.headerIcon {
+  color: var(--color-primary);
+}
+
+.recordBadge,
+.playBadge {
+  border-radius: 999px;
+  color: var(--color-white);
+  font-size: var(--font-size-8);
+  padding: var(--space-tiny) var(--space-medium);
+  text-transform: uppercase;
+}
+
+.recordBadge {
+  animation: blink 1s ease-in-out infinite;
+  background: var(--color-alert);
+}
+
+.playBadge {
+  background: var(--color-warning);
+}
+
+.stage {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+
+.canvas {
+  border: solid 3px transparent;
+  border-radius: 8px;
+  box-sizing: border-box;
+  height: 100%;
+  transition: border-color 0.2s ease-in-out;
+  width: 100%;
+}
+
+.recording .canvas {
+  border-color: var(--color-alert);
+}
+
+.meter {
+  background: var(--color-theme-medium);
+  border-radius: 6px;
+  bottom: var(--space-big);
+  overflow: hidden;
+  position: absolute;
+  right: var(--space-big);
+  top: var(--space-big);
+  width: 10px;
+}
+
+.meterLevel {
+  background: var(--color-success);
+  height: 100%;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  width: 100%;
+}
+
+.timeline {
+  background: var(--color-theme-medium);
+  border-radius: 6px;
+  display: flex;
+  gap: 1px;
+  height: 28px;
+  overflow: hidden;
+  position: relative;
+}
+
+.segment {
+  background: var(--color-theme-light);
+  cursor: pointer;
+  flex-basis: 0;
+  min-width: 1px;
+}
+
+.segmentAudio {
+  background: var(--color-primary);
+}
+
+.segmentCurrent {
+  box-shadow: inset 0 0 0 2px var(--color-white);
+}
+
+.cursor {
+  background: var(--color-white);
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transform: translateX(-1px);
+  width: 2px;
+}
+
+.infos {
+  color: var(--color-white);
+  display: flex;
+  font-size: var(--font-size-6);
+  gap: var(--space-big);
+  justify-content: space-between;
+}
+
+.infoMuted {
+  opacity: 0.6;
+}
+
+.warning {
+  color: var(--color-warning);
+  font-size: var(--font-size-7);
+  text-align: center;
+}
+
+.navbar {
+  align-items: center;
+  background: rgb(0 0 0 / 50%);
+  border-radius: 40px;
+  display: flex;
+  gap: var(--space-medium);
+  justify-content: center;
+  margin: 0 auto;
+  padding: var(--space-small) var(--space-huge);
+}
+
+.flipped svg {
+  transform: rotate(180deg);
+}
+
+.recordButton {
+  align-items: center;
+  background: var(--color-theme-medium);
+  border: solid 3px var(--color-alert);
+  border-radius: 50%;
+  color: var(--color-white);
+  cursor: pointer;
+  display: flex;
+  font-size: 1.6rem;
+  height: 64px;
+  justify-content: center;
+  touch-action: none;
+  transition: background-color 0.2s ease-in-out;
+  user-select: none;
+  width: 64px;
+}
+
+.recordButtonActive {
+  background: var(--color-alert);
+}
+
+.recordButtonDisabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.hint {
+  color: var(--color-white);
+  font-size: var(--font-size-8);
+  opacity: 0.5;
+  text-align: center;
+}
+
+.empty {
+  color: var(--color-white);
+  margin: auto;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Keyboard hints mean nothing on touch screens */
+@media (hover: none) {
+  .hint {
+    display: none;
+  }
+}

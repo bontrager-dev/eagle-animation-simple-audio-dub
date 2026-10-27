@@ -24,9 +24,12 @@ export const exportProjectScene = async (projectPath, scene, frames, filePath, f
   for (const frame of frames) {
     await copyFile(join(bufferDirectoryPath, frame.buffer_id), join(directoryPath, `frame-${frame.index.toString().padStart(6, '0')}.${frame.extension}`));
   }
+  if (opts.audioBufferId) {
+    await copyFile(join(bufferDirectoryPath, opts.audioBufferId), join(directoryPath, 'audio.wav'));
+  }
 
   const fps = opts?.framerate || project.project.scenes[scene].framerate;
-  const args = getFFmpegArgs(format, filePath, fps, opts);
+  const args = getFFmpegArgs(format, filePath, fps, { ...opts, audioFile: opts.audioBufferId ? 'audio.wav' : null });
 
   const handleData = (data) => {
     parseFFmpegLogs(data, frames.length || 0, opts.customOutputFramerate ? opts.customOutputFramerateNumber : undefined, onProgress);

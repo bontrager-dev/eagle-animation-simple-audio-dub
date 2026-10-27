@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { readdir, readFile, stat, writeFile } from 'node:fs/promises';
-import { format, join } from 'node:path';
+import { basename, format, join } from 'node:path';
 
 import { mkdirp } from 'mkdirp';
 import { v4 } from 'uuid';
@@ -123,6 +123,17 @@ const createImageFile = async (projectPath, scene, ext, data) => {
     scene,
     path: filePath,
   };
+};
+
+// Save a recorded audio take next to the scene pictures
+export const saveAudio = async (projectPath, track, ext, buffer) => {
+  const file = await createImageFile(projectPath, Number(track), ext, buffer);
+  return { filename: file.filename };
+};
+
+// Read an audio take; basename() keeps the read inside the scene folder
+export const getAudio = async (projectPath, track, filename) => {
+  return readFile(join(projectPath, `${Number(track)}`, basename(`${filename}`))).catch(() => null);
 };
 
 // Create picture object

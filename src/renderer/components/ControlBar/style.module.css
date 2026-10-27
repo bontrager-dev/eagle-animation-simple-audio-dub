@@ -31,6 +31,13 @@
   width: 156px;
 }
 
+/* Room for the audio dubbing button */
+.subcontainer.center.centerWide {
+  max-width: 208px;
+  min-width: 208px;
+  width: 208px;
+}
+
 .slider {
   display: inline-block;
   margin-left: 22px;

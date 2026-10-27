@@ -66,6 +66,7 @@ const ShortcutsList = ({ t, shortcuts }) => {
     UNDO: t('Undo last action'),
     REDO: t('Redo last undone action'),
     ADD_SCENE: t('Add new scene'),
+    AUDIO_DUBBING: t('Open audio dubbing'),
   };
 
   const categories = {
@@ -86,7 +87,7 @@ const ShortcutsList = ({ t, shortcuts }) => {
       'ONION_MORE',
       'GRID',
     ],
-    ACTIONS: ['DELETE_FRAME', 'CLONE', 'DUPLICATE', 'DEDUPLICATE', 'HIDE_FRAME', 'ADD_SCENE', 'UNDO', 'REDO'],
+    ACTIONS: ['DELETE_FRAME', 'CLONE', 'DUPLICATE', 'DEDUPLICATE', 'HIDE_FRAME', 'ADD_SCENE', 'UNDO', 'REDO', 'AUDIO_DUBBING'],
     NAVIGATION: ['FRAME_LEFT', 'FRAME_RIGHT', 'ALTERNATIVE_FRAME_LEFT', 'ALTERNATIVE_FRAME_RIGHT', 'FRAME_LIVE', 'FRAME_FIRST'],
     OTHER: ['HOME'],
   };

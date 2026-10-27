@@ -35,6 +35,7 @@ const SHORTCUTS = {
   ADD_SCENE: ['ctrl+n'],
   UNDO: ['ctrl+z'],
   REDO: ['ctrl+y', 'ctrl+shift+z'],
+  AUDIO_DUBBING: ['d'],
 };
 
 const PARSED_SHORTCUTS = Object.keys(SHORTCUTS).reduce((acc, key) => ({ ...acc, [key]: SHORTCUTS[key].map((e) => (isMac ? e.replaceAll('ctrl', 'meta') : e)) }), {});
