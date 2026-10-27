@@ -29,7 +29,8 @@ const DEFAULT_SETTINGS = {
   EVENT_API: PARTNER_API,
   TOUCAN_CAMERA_SERVER_DISABLED: false,
   TOUCAN_CAMERA_SERVER_EXPOSE: false,
-  TELEMETRY_ENABLED: true,
+  // Opt-in under a new key: installs that saved the old TELEMETRY_ENABLED: true start with telemetry off too
+  TELEMETRY_OPT_IN: false,
   TOURS_COMPLETED: [], // Keys of the guided tours the user has already seen
 };
 
@@ -46,7 +47,7 @@ let SETTINGS_WRITE_QUEUE = Promise.resolve();
 
 const broadcastSettings = (settings) => {
   CURRENT_SETTINGS = settings;
-  window.setTelemetryEnabled?.(settings.TELEMETRY_ENABLED !== false);
+  window.setTelemetryEnabled?.(settings.TELEMETRY_OPT_IN === true);
   SETTINGS_LISTENERS.forEach((listener) => listener(settings));
 };
 
