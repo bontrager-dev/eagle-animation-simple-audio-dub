@@ -67,18 +67,33 @@ export class DubAudio {
     this.lastFrame = 0;
     this.level = 0;
     this.micReady = false;
+    this.deviceId = null;
+    this.openCount = 0;
     this.inputLatency = 0;
     this.takeStart = null;
     this.source = null;
     this.playStart = null;
   }
 
-  async openMicrophone() {
-    this.stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
-    const moduleUrl = URL.createObjectURL(new Blob([CAPTURE_WORKLET], { type: 'application/javascript' }));
-    await this.context.audioWorklet.addModule(moduleUrl);
-    URL.revokeObjectURL(moduleUrl);
+  // Opens a microphone, or switches to another one; no deviceId means the system default
+  async openMicrophone(deviceId = null) {
+    const openId = ++this.openCount;
+    this.closeMicrophone();
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: { ...(deviceId ? { deviceId: { exact: deviceId } } : {}), echoCancellation: false, noiseSuppression: false, autoGainControl: false },
+    });
+    if (!this.workletLoaded) {
+      const moduleUrl = URL.createObjectURL(new Blob([CAPTURE_WORKLET], { type: 'application/javascript' }));
+      this.workletLoaded = this.context.audioWorklet.addModule(moduleUrl).finally(() => URL.revokeObjectURL(moduleUrl));
+    }
+    await this.workletLoaded;
+    // A newer call (the user picked another device meanwhile) wins
+    if (openId !== this.openCount) {
+      stream.getTracks().forEach((track) => track.stop());
+      return;
+    }
 
+    this.stream = stream;
     this.input = this.context.createMediaStreamSource(this.stream);
     this.capture = new AudioWorkletNode(this.context, 'dub-capture', { numberOfOutputs: 1, outputChannelCount: [1] });
     this.capture.port.onmessage = (event) => this.handleChunk(event.data);
@@ -88,8 +103,25 @@ export class DubAudio {
     this.mute.gain.value = 0;
     this.input.connect(this.capture).connect(this.mute).connect(this.context.destination);
 
-    this.inputLatency = Number(this.stream.getAudioTracks()[0]?.getSettings()?.latency) || 0;
+    const trackSettings = this.stream.getAudioTracks()[0]?.getSettings() || {};
+    this.inputLatency = Number(trackSettings.latency) || 0;
+    this.deviceId = trackSettings.deviceId || deviceId;
     this.micReady = true;
+  }
+
+  closeMicrophone() {
+    this.micReady = false;
+    if (this.capture) {
+      this.capture.port.onmessage = null;
+    }
+    [this.input, this.capture, this.mute].forEach((node) => node?.disconnect());
+    this.stream?.getTracks().forEach((track) => track.stop());
+    this.input = null;
+    this.capture = null;
+    this.mute = null;
+    this.stream = null;
+    this.chunks = [];
+    this.level = 0;
   }
 
   resume() {
@@ -205,7 +237,8 @@ export class DubAudio {
 
   close() {
     this.stop();
-    this.stream?.getTracks().forEach((track) => track.stop());
+    this.openCount++;
+    this.closeMicrophone();
     this.context.close();
   }
 }

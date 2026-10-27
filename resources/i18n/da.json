@@ -486,6 +486,8 @@
   "Microphone unavailable, only the timing will be recorded": "Mikrofonen er ikke tilgængelig, kun timingen bliver optaget",
   "Hold to record": "Hold nede for at optage",
   "Undo": "Fortryd",
-  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Pile: flyt • Hold Mellemrum: optag • Enter: afspil • Z: fortryd",
-  "Open audio dubbing": "Åbn lydindspilning"
+  "Open audio dubbing": "Åbn lydindspilning",
+  "Microphone": "Mikrofon",
+  "Microphone {{index}}": "Mikrofon {{index}}",
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Pile: flyt (hold nede for at fortsætte) • Hold Enter: optag • Mellemrum: afspil • Z: fortryd"
 }

@@ -493,6 +493,8 @@
   "Microphone unavailable, only the timing will be recorded": "Mikrofón nie je k dispozícii, zaznamená sa iba časovanie",
   "Hold to record": "Podržaním nahrávajte",
   "Undo": "Späť",
-  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Šípky: posun • Podržte medzerník: nahrávanie • Enter: prehrať • Z: späť",
-  "Open audio dubbing": "Otvoriť nahrávanie zvuku"
+  "Open audio dubbing": "Otvoriť nahrávanie zvuku",
+  "Microphone": "Mikrofón",
+  "Microphone {{index}}": "Mikrofón {{index}}",
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Šípky: posun (podržaním pokračovať) • Podržte Enter: nahrávanie • Medzerník: prehrať • Z: späť"
 }

@@ -500,6 +500,8 @@
   "Microphone unavailable, only the timing will be recorded": "Mikrofono ne disponeblas, nur la tempigo estos registrita",
   "Hold to record": "Tenu por registri",
   "Undo": "Malfari",
-  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Sagoj: movi • Tenu Spacon: registri • Enigo: ludi • Z: malfari",
-  "Open audio dubbing": "Malfermi sonregistradon"
+  "Open audio dubbing": "Malfermi sonregistradon",
+  "Microphone": "Mikrofono",
+  "Microphone {{index}}": "Mikrofono {{index}}",
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Sagoj: movi (tenu por daŭrigi) • Tenu Enigon: registri • Spaco: ludi • Z: malfari"
 }

@@ -486,6 +486,8 @@
   "Microphone unavailable, only the timing will be recorded": "Το μικρόφωνο δεν είναι διαθέσιμο, θα καταγραφεί μόνο ο χρονισμός",
   "Hold to record": "Κρατήστε πατημένο για ηχογράφηση",
   "Undo": "Αναίρεση",
-  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Βέλη: μετακίνηση • Κρατήστε το Διάστημα: ηχογράφηση • Enter: αναπαραγωγή • Z: αναίρεση",
-  "Open audio dubbing": "Άνοιγμα ηχογράφησης φωνής"
+  "Open audio dubbing": "Άνοιγμα ηχογράφησης φωνής",
+  "Microphone": "Μικρόφωνο",
+  "Microphone {{index}}": "Μικρόφωνο {{index}}",
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Βέλη: μετακίνηση (κρατήστε για συνέχεια) • Κρατήστε το Enter: ηχογράφηση • Διάστημα: αναπαραγωγή • Z: αναίρεση"
 }

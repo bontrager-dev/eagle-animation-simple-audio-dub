@@ -13,9 +13,10 @@ const GAMEPAD_BUTTONS = {
 const TRIGGER_BACK = 6;
 const TRIGGER_FORWARD = 7;
 
+// Same roles as in capture mode: Enter acts (record), Space plays
 export const KEYBOARD_KEYS = {
-  RECORD: [' ', 'r', 'R'],
-  PLAY: ['Enter', 'p', 'P'],
+  RECORD: ['Enter', 'r', 'R'],
+  PLAY: [' ', 'p', 'P'],
   UNDO: ['z', 'Z'],
   STEP_BACK: ['ArrowLeft', ','],
   STEP_FORWARD: ['ArrowRight', '.'],
@@ -24,8 +25,10 @@ export const KEYBOARD_KEYS = {
   CLOSE: ['Escape'],
 };
 
-// Only stepping repeats while a key is held
-export const REPEATING_ACTIONS = ['STEP_BACK', 'STEP_FORWARD'];
+export const STEP_ACTIONS = ['STEP_BACK', 'STEP_FORWARD'];
+
+// A step key held longer than this keeps stepping at the scene framerate
+const HOLD_DELAY = 300;
 
 export const getKeyboardAction = (key) => Object.keys(KEYBOARD_KEYS).find((action) => KEYBOARD_KEYS[action].includes(key)) || null;
 
@@ -61,6 +64,32 @@ export class TriggerScrubber {
   }
 }
 
+// Repeats a held step at the scene framerate. Like the triggers, each step carries the moment it was due.
+export class HoldRepeater {
+  constructor() {
+    this.held = null;
+  }
+
+  press(action, time, fps) {
+    this.held = { action, next: time + HOLD_DELAY, interval: 1000 / Math.max(1, fps) };
+  }
+
+  release(action = null) {
+    if (!action || this.held?.action === action) {
+      this.held = null;
+    }
+  }
+
+  update(now) {
+    const steps = [];
+    while (this.held && this.held.next <= now) {
+      steps.push({ action: this.held.action, pressed: true, time: this.held.next });
+      this.held.next += this.held.interval;
+    }
+    return steps;
+  }
+}
+
 // Turns gamepad state into { action, pressed, time } events. Call poll() once per animation frame.
 export class GamepadInput {
   constructor() {
@@ -79,7 +108,7 @@ export class GamepadInput {
     for (const [action, indexes] of Object.entries(GAMEPAD_BUTTONS)) {
       const isPressed = pads.some((pad) => indexes.some((index) => pad.buttons[index]?.pressed));
       if (isPressed !== !!this.pressed.get(action)) {
-        events.push({ action, pressed: isPressed, time: now });
+        events.push({ action, pressed: isPressed, time: now, hold: STEP_ACTIONS.includes(action) });
         this.pressed.set(action, isPressed);
       }
     }

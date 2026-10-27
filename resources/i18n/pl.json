@@ -507,6 +507,8 @@
   "Microphone unavailable, only the timing will be recorded": "Mikrofon niedostępny, zostanie zapisany tylko czas",
   "Hold to record": "Przytrzymaj, aby nagrywać",
   "Undo": "Cofnij",
-  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Strzałki: przesuwanie • Przytrzymaj spację: nagrywanie • Enter: odtwórz • Z: cofnij",
-  "Open audio dubbing": "Otwórz nagrywanie dźwięku"
+  "Open audio dubbing": "Otwórz nagrywanie dźwięku",
+  "Microphone": "Mikrofon",
+  "Microphone {{index}}": "Mikrofon {{index}}",
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Strzałki: przesuwanie (przytrzymaj, aby kontynuować) • Przytrzymaj Enter: nagrywanie • Spacja: odtwórz • Z: cofnij"
 }

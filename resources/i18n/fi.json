@@ -486,6 +486,8 @@
   "Microphone unavailable, only the timing will be recorded": "Mikrofoni ei ole käytettävissä, vain ajoitus tallennetaan",
   "Hold to record": "Pidä painettuna tallentaaksesi",
   "Undo": "Kumoa",
-  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Nuolet: siirrä • Pidä välilyöntiä: tallenna • Enter: toista • Z: kumoa",
-  "Open audio dubbing": "Avaa äänitys"
+  "Open audio dubbing": "Avaa äänitys",
+  "Microphone": "Mikrofoni",
+  "Microphone {{index}}": "Mikrofoni {{index}}",
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Nuolet: siirrä (pidä painettuna jatkaaksesi) • Pidä Enteriä: tallenna • Välilyönti: toista • Z: kumoa"
 }
