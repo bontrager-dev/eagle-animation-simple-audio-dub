@@ -3,7 +3,7 @@ import 'source-map-support/register';
 import { join } from 'node:path';
 
 import { electronApp, is, optimizer } from '@electron-toolkit/utils';
-import { app, BrowserWindow, ipcMain, protocol, shell } from 'electron';
+import { app, BrowserWindow, ipcMain, protocol, session, shell } from 'electron';
 
 import icon from '../../resources/icon.png?asset';
 import actions from './actions';
@@ -72,6 +72,15 @@ app.whenReady().then(() => {
 
   // Register custom protocol for image processing
   protocol.handle('ea', ImageRoute);
+
+  // The app only ever runs its own code: scripts, frames and plugins from the network are refused,
+  // whatever a dependency (e.g. analytics) asks for. The dev server is the one exception.
+  const devServerUrl = is.dev ? process.env['ELECTRON_RENDERER_URL'] : null;
+  session.defaultSession.webRequest.onBeforeRequest({ urls: ['http://*/*', 'https://*/*'] }, (details, callback) => {
+    const isCode = ['script', 'subFrame', 'object'].includes(details.resourceType);
+    const isDevServer = !!devServerUrl && details.url.startsWith(devServerUrl);
+    callback({ cancel: isCode && !isDevServer });
+  });
 
   createWindow();
 

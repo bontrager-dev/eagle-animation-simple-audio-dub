@@ -19,6 +19,19 @@ const nodeExternals = ['electron', /^electron\/.+/, ...builtinModules.flatMap((m
 
 const dependencyExternals = Object.keys(dependencies).flatMap((name) => [name, new RegExp(`^${escapeForRegExp(name)}/`)]);
 
+// Packaged app: only its own scripts may run (blob: is the audio worklet), never remote or eval'd code
+const contentSecurityPolicy = () => ({
+  name: 'content-security-policy',
+  apply: 'build',
+  transformIndexHtml: () => [
+    {
+      tag: 'meta',
+      attrs: { 'http-equiv': 'Content-Security-Policy', content: "script-src 'self' blob:; worker-src 'self' blob:; object-src 'none'; base-uri 'none'" },
+      injectTo: 'head-prepend',
+    },
+  ],
+});
+
 const commonJsOutput = {
   format: 'cjs',
   entryFileNames: '[name].js',
@@ -79,6 +92,7 @@ export default defineConfig(({ mode }) => {
         },
       },
       plugins: [
+        contentSecurityPolicy(),
         react(),
         svgr({
           include: '**/*.svg?jsx',

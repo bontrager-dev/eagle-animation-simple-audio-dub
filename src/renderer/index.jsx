@@ -20,29 +20,37 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
-try {
-  if (!IS_DEV && POSTHOG_TOKEN) {
-    posthog.init(POSTHOG_TOKEN, {
-      api_host: POSTHOG_HOST,
-      person_profiles: 'always',
-      autocapture: false,
-      disable_session_recording: true,
-      opt_out_capturing_by_default: true,
-    });
-
-    posthog.register({
-      app_version: VERSION,
-      app_build: BUILD,
-    });
+// PostHog is only started once the user opts in, so nothing is sent or stored before that.
+// It must never run code from the network: no remote config script, flags, surveys or recordings.
+let isPosthogStarted = false;
+const startPosthog = () => {
+  if (isPosthogStarted) {
+    return;
   }
-} catch (err) {} // eslint-disable-line no-empty
+  posthog.init(POSTHOG_TOKEN, {
+    api_host: POSTHOG_HOST,
+    person_profiles: 'always',
+    autocapture: false,
+    disable_session_recording: true,
+    disable_surveys: true,
+    disable_external_dependency_loading: true,
+    advanced_disable_flags: true,
+    opt_out_capturing_by_default: true,
+  });
+  posthog.register({
+    app_version: VERSION,
+    app_build: BUILD,
+  });
+  isPosthogStarted = true;
+};
 
 window.setTelemetryEnabled = (enabled) => {
   try {
     if (!IS_DEV && POSTHOG_TOKEN) {
       if (enabled) {
+        startPosthog();
         posthog.opt_in_capturing();
-      } else {
+      } else if (isPosthogStarted) {
         posthog.opt_out_capturing();
       }
     }
@@ -51,7 +59,7 @@ window.setTelemetryEnabled = (enabled) => {
 
 window.track = (eventName, data = {}) => {
   try {
-    if (!IS_DEV && POSTHOG_TOKEN) {
+    if (!IS_DEV && POSTHOG_TOKEN && isPosthogStarted) {
       console.log(`📊 Tracking event: ${eventName}`, data);
       posthog.capture(eventName, data);
     }
@@ -60,7 +68,7 @@ window.track = (eventName, data = {}) => {
 
 window.trackException = (error) => {
   try {
-    if (!IS_DEV && POSTHOG_TOKEN) {
+    if (!IS_DEV && POSTHOG_TOKEN && isPosthogStarted) {
       console.log(`📊 Tracking exception:`, error);
       posthog.captureException(error);
     }

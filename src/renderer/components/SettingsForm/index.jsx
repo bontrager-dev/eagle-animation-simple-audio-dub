@@ -10,7 +10,7 @@ import Input from '@components/Input';
 import NumberInput from '@components/NumberInput';
 import Select from '@components/Select';
 import Switch from '@components/Switch';
-import { TOUCAN_CAMERA_SERVER_AVAILABLE, LANGUAGES } from '@config-web';
+import { LANGUAGES, TOUCAN_CAMERA_SERVER_AVAILABLE } from '@config-web';
 import { formatFileSize } from '@core/format';
 import useAppCapabilities from '@hooks/useAppCapabilities';
 import useAppVersion from '@hooks/useAppVersion';
@@ -62,7 +62,7 @@ const SettingsForm = ({ settings = {}, onUpdate = () => {}, t }) => {
         </FormGroup>
         <FormGroup label={t('Allow telemetry')} description={t('Send anonymous usage data to help improve the application')}>
           <div>
-            <Switch register={register('TELEMETRY_ENABLED')} />
+            <Switch register={register('TELEMETRY_OPT_IN')} />
           </div>
         </FormGroup>
         <FormGroup label={t('Update')} description={t('Stay up to date to enjoy the latest features and improvements')}>
