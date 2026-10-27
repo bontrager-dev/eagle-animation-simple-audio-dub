@@ -475,5 +475,17 @@
   "Expose the cameras so they can be used from other devices ({{hostname}}:{{port}}, using {{token}})": "Stelt de camera's beschikbaar zodat ze vanaf andere apparaten gebruikt kunnen worden ({{hostname}}:{{port}}, met {{token}})",
   "Auto": "Auto",
   "Automatic rotation": "Automatische rotatie",
-  "Rotation": "Rotatie"
+  "Rotation": "Rotatie",
+  "Audio dubbing": "Audio inspreken",
+  "The recording could not be saved": "De opname kon niet worden opgeslagen",
+  "Take some pictures before recording sound": "Maak eerst een paar foto's voordat je geluid opneemt",
+  "Recording": "Opnemen",
+  "Microphone level": "Microfoonniveau",
+  "Frame {{current}} / {{total}}": "Frame {{current}} / {{total}}",
+  "Shown for {{duration}} s": "Getoond gedurende {{duration}} s",
+  "Microphone unavailable, only the timing will be recorded": "Microfoon niet beschikbaar, alleen de timing wordt opgenomen",
+  "Hold to record": "Ingedrukt houden om op te nemen",
+  "Undo": "Ongedaan maken",
+  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Pijlen: verplaatsen • Spatie ingedrukt houden: opnemen • Enter: afspelen • Z: ongedaan maken",
+  "Open audio dubbing": "Audio inspreken openen"
 }

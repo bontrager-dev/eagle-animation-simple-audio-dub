@@ -475,5 +475,17 @@
   "Expose the cameras so they can be used from other devices ({{hostname}}:{{port}}, using {{token}})": "Καθιστά τις κάμερες διαθέσιμες ώστε να μπορούν να χρησιμοποιηθούν από άλλες συσκευές ({{hostname}}:{{port}}, με {{token}})",
   "Auto": "Αυτόμ.",
   "Automatic rotation": "Αυτόματη περιστροφή",
-  "Rotation": "Περιστροφή"
+  "Rotation": "Περιστροφή",
+  "Audio dubbing": "Ηχογράφηση φωνής",
+  "The recording could not be saved": "Δεν ήταν δυνατή η αποθήκευση της ηχογράφησης",
+  "Take some pictures before recording sound": "Βγάλτε μερικές φωτογραφίες πριν ηχογραφήσετε ήχο",
+  "Recording": "Ηχογράφηση",
+  "Microphone level": "Στάθμη μικροφώνου",
+  "Frame {{current}} / {{total}}": "Καρέ {{current}} / {{total}}",
+  "Shown for {{duration}} s": "Εμφανίζεται για {{duration}} δ",
+  "Microphone unavailable, only the timing will be recorded": "Το μικρόφωνο δεν είναι διαθέσιμο, θα καταγραφεί μόνο ο χρονισμός",
+  "Hold to record": "Κρατήστε πατημένο για ηχογράφηση",
+  "Undo": "Αναίρεση",
+  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Βέλη: μετακίνηση • Κρατήστε το Διάστημα: ηχογράφηση • Enter: αναπαραγωγή • Z: αναίρεση",
+  "Open audio dubbing": "Άνοιγμα ηχογράφησης φωνής"
 }

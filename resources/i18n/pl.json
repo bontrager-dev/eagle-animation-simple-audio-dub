@@ -496,5 +496,17 @@
   "Expose the cameras so they can be used from other devices ({{hostname}}:{{port}}, using {{token}})": "Udostępnia kamery, aby można było ich używać z innych urządzeń ({{hostname}}:{{port}}, przy użyciu {{token}})",
   "Auto": "Auto",
   "Automatic rotation": "Automatyczny obrót",
-  "Rotation": "Obrót"
+  "Rotation": "Obrót",
+  "Audio dubbing": "Nagrywanie dźwięku",
+  "The recording could not be saved": "Nie udało się zapisać nagrania",
+  "Take some pictures before recording sound": "Zrób kilka zdjęć przed nagraniem dźwięku",
+  "Recording": "Nagrywanie",
+  "Microphone level": "Poziom mikrofonu",
+  "Frame {{current}} / {{total}}": "Klatka {{current}} / {{total}}",
+  "Shown for {{duration}} s": "Wyświetlana przez {{duration}} s",
+  "Microphone unavailable, only the timing will be recorded": "Mikrofon niedostępny, zostanie zapisany tylko czas",
+  "Hold to record": "Przytrzymaj, aby nagrywać",
+  "Undo": "Cofnij",
+  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Strzałki: przesuwanie • Przytrzymaj spację: nagrywanie • Enter: odtwórz • Z: cofnij",
+  "Open audio dubbing": "Otwórz nagrywanie dźwięku"
 }

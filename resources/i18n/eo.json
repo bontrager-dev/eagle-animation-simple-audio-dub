@@ -489,5 +489,17 @@
   "Expose the cameras so they can be used from other devices ({{hostname}}:{{port}}, using {{token}})": "Disponebligas la kameraojn por ke ili estu uzeblaj de aliaj aparatoj ({{hostname}}:{{port}}, uzante {{token}})",
   "Auto": "Aŭto",
   "Automatic rotation": "Aŭtomata turno",
-  "Rotation": "Turno"
+  "Rotation": "Turno",
+  "Audio dubbing": "Sonregistrado",
+  "The recording could not be saved": "La registraĵo ne povis esti konservita",
+  "Take some pictures before recording sound": "Prenu kelkajn fotojn antaŭ ol registri sonon",
+  "Recording": "Registrado",
+  "Microphone level": "Mikrofona nivelo",
+  "Frame {{current}} / {{total}}": "Kadro {{current}} / {{total}}",
+  "Shown for {{duration}} s": "Montrata dum {{duration}} s",
+  "Microphone unavailable, only the timing will be recorded": "Mikrofono ne disponeblas, nur la tempigo estos registrita",
+  "Hold to record": "Tenu por registri",
+  "Undo": "Malfari",
+  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Sagoj: movi • Tenu Spacon: registri • Enigo: ludi • Z: malfari",
+  "Open audio dubbing": "Malfermi sonregistradon"
 }

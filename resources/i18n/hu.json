@@ -475,5 +475,17 @@
   "Expose the cameras so they can be used from other devices ({{hostname}}:{{port}}, using {{token}})": "Elérhetővé teszi a kamerákat, hogy más eszközökről is használhatók legyenek ({{hostname}}:{{port}}, ezzel: {{token}})",
   "Auto": "Auto",
   "Automatic rotation": "Automatikus elfordulás",
-  "Rotation": "Elfordulás"
+  "Rotation": "Elfordulás",
+  "Audio dubbing": "Hangalámondás",
+  "The recording could not be saved": "A felvételt nem sikerült menteni",
+  "Take some pictures before recording sound": "Készíts néhány képet, mielőtt hangot veszel fel",
+  "Recording": "Felvétel",
+  "Microphone level": "Mikrofonszint",
+  "Frame {{current}} / {{total}}": "Képkocka {{current}} / {{total}}",
+  "Shown for {{duration}} s": "Megjelenítve {{duration}} mp-ig",
+  "Microphone unavailable, only the timing will be recorded": "A mikrofon nem érhető el, csak az időzítés lesz rögzítve",
+  "Hold to record": "Tartsd lenyomva a felvételhez",
+  "Undo": "Visszavonás",
+  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Nyilak: mozgás • Szóköz nyomva tartása: felvétel • Enter: lejátszás • Z: visszavonás",
+  "Open audio dubbing": "Hangalámondás megnyitása"
 }

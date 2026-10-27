@@ -484,5 +484,17 @@
   "Expose the cameras so they can be used from other devices ({{hostname}}:{{port}}, using {{token}})": "Izpostavi kamere, da jih je mogoče uporabljati z drugih naprav ({{hostname}}:{{port}}, z {{token}})",
   "Auto": "Samodejno",
   "Automatic rotation": "Samodejno vrtenje",
-  "Rotation": "Vrtenje"
+  "Rotation": "Vrtenje",
+  "Audio dubbing": "Snemanje zvoka",
+  "The recording could not be saved": "Posnetka ni bilo mogoče shraniti",
+  "Take some pictures before recording sound": "Pred snemanjem zvoka posnemite nekaj fotografij",
+  "Recording": "Snemanje",
+  "Microphone level": "Raven mikrofona",
+  "Frame {{current}} / {{total}}": "Sličica {{current}} / {{total}}",
+  "Shown for {{duration}} s": "Prikazano {{duration}} s",
+  "Microphone unavailable, only the timing will be recorded": "Mikrofon ni na voljo, posnel se bo le časovni potek",
+  "Hold to record": "Držite za snemanje",
+  "Undo": "Razveljavi",
+  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Puščice: premik • Držite preslednico: snemanje • Enter: predvajanje • Z: razveljavi",
+  "Open audio dubbing": "Odpri snemanje zvoka"
 }

@@ -475,5 +475,17 @@
   "Expose the cameras so they can be used from other devices ({{hostname}}:{{port}}, using {{token}})": "Предоставя камерите, за да могат да се използват от други устройства ({{hostname}}:{{port}}, чрез {{token}})",
   "Auto": "Авто",
   "Automatic rotation": "Автоматично завъртане",
-  "Rotation": "Завъртане"
+  "Rotation": "Завъртане",
+  "Audio dubbing": "Озвучаване",
+  "The recording could not be saved": "Записът не можа да бъде запазен",
+  "Take some pictures before recording sound": "Направете няколко снимки, преди да записвате звук",
+  "Recording": "Запис",
+  "Microphone level": "Ниво на микрофона",
+  "Frame {{current}} / {{total}}": "Кадър {{current}} / {{total}}",
+  "Shown for {{duration}} s": "Показва се {{duration}} с",
+  "Microphone unavailable, only the timing will be recorded": "Микрофонът не е достъпен, ще се запише само времето",
+  "Hold to record": "Задръжте за запис",
+  "Undo": "Отмени",
+  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Стрелки: преместване • Задръжте Интервал: запис • Enter: пускане • Z: отмяна",
+  "Open audio dubbing": "Отвори озвучаването"
 }

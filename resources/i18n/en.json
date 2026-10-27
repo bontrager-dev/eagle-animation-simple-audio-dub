@@ -496,5 +496,17 @@
   "Expose the cameras so they can be used from other devices ({{hostname}}:{{port}}, using {{token}})": "Expose the cameras so they can be used from other devices ({{hostname}}:{{port}}, using {{token}})",
   "Auto": "Auto",
   "Automatic rotation": "Automatic rotation",
-  "Rotation": "Rotation"
+  "Rotation": "Rotation",
+  "Audio dubbing": "Audio dubbing",
+  "The recording could not be saved": "The recording could not be saved",
+  "Take some pictures before recording sound": "Take some pictures before recording sound",
+  "Recording": "Recording",
+  "Microphone level": "Microphone level",
+  "Frame {{current}} / {{total}}": "Frame {{current}} / {{total}}",
+  "Shown for {{duration}} s": "Shown for {{duration}} s",
+  "Microphone unavailable, only the timing will be recorded": "Microphone unavailable, only the timing will be recorded",
+  "Hold to record": "Hold to record",
+  "Undo": "Undo",
+  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Arrows: move • Hold Space: record • Enter: play • Z: undo",
+  "Open audio dubbing": "Open audio dubbing"
 }

@@ -482,5 +482,17 @@
   "Expose the cameras so they can be used from other devices ({{hostname}}:{{port}}, using {{token}})": "Открывает доступ к камерам, чтобы их можно было использовать с других устройств ({{hostname}}:{{port}}, с {{token}})",
   "Auto": "Авто",
   "Automatic rotation": "Автоматический поворот",
-  "Rotation": "Поворот"
+  "Rotation": "Поворот",
+  "Audio dubbing": "Озвучивание",
+  "The recording could not be saved": "Не удалось сохранить запись",
+  "Take some pictures before recording sound": "Сделайте несколько снимков перед записью звука",
+  "Recording": "Запись",
+  "Microphone level": "Уровень микрофона",
+  "Frame {{current}} / {{total}}": "Кадр {{current}} / {{total}}",
+  "Shown for {{duration}} s": "Показывается {{duration}} с",
+  "Microphone unavailable, only the timing will be recorded": "Микрофон недоступен, будет записан только тайминг",
+  "Hold to record": "Удерживайте для записи",
+  "Undo": "Отменить",
+  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Стрелки: перемещение • Удерживайте Пробел: запись • Enter: воспроизведение • Z: отмена",
+  "Open audio dubbing": "Открыть озвучивание"
 }
