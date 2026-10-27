@@ -580,7 +580,6 @@ const Animator = ({ t }) => {
     AUDIO_DUBBING: () => {
       if (canUseAudioDubbing && !isPlaying) {
         setActiveWindow('dubbing');
-        window.track('audio_dubbing_opened', { projectId: `${id}`, trackId: `${track}` });
       }
     },
   };
@@ -878,10 +877,7 @@ const Animator = ({ t }) => {
                 audioInputId={settings.AUDIO_INPUT_ID || null}
                 onAudioInputChange={(deviceId) => settingsActions.setSettings({ AUDIO_INPUT_ID: deviceId })}
                 onSaveAudio={(buffer) => projectActions.saveAudio(track, buffer)}
-                onApplyDub={(changes) => {
-                  projectActions.applyDub(track, changes);
-                  window.track('audio_dubbing_recorded', { projectId: `${id}`, trackId: `${track}`, nbFrames: changes.length });
-                }}
+                onApplyDub={(changes) => projectActions.applyDub(track, changes)}
                 onUndo={() => projectActions.undo()}
                 onClose={handleCloseDubbing}
               />

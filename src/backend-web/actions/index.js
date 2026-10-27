@@ -150,9 +150,9 @@ export const Actions = {
     };
   },
   // Audio takes share the frames blob store, keyed by the same kind of id
-  SAVE_AUDIO: async (evt, { buffer, extension = 'wav' }) => {
-    const audioId = await createFrame(buffer, extension);
-    return { filename: `${audioId}.${extension}` };
+  SAVE_AUDIO: async (evt, { buffer }) => {
+    const audioId = await createFrame(buffer, 'wav');
+    return { filename: `${audioId}.wav` };
   },
   GET_AUDIO: async (evt, { filename }) => {
     const blob = await getFrameBlob(`${filename}`.split('.')[0]);

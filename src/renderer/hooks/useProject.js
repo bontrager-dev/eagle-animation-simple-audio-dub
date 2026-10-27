@@ -369,12 +369,11 @@ function useProject(options) {
 
   // Action save audio take
   const actionSaveAudio = useCallback(
-    async (trackId, buffer, extension = 'wav') => {
+    async (trackId, buffer) => {
       return window.EA('SAVE_AUDIO', {
         project_id: projectId,
         track_id: Number(trackId),
         buffer: Buffer.from(buffer),
-        extension,
       });
     },
     [projectId]
