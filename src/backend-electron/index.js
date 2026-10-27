@@ -3,12 +3,13 @@ import 'source-map-support/register';
 import { join } from 'node:path';
 
 import { electronApp, is, optimizer } from '@electron-toolkit/utils';
-import { app, BrowserWindow, ipcMain, protocol, session, shell } from 'electron';
+import { app, BrowserWindow, ipcMain, protocol, session } from 'electron';
 
 import icon from '../../resources/icon.png?asset';
 import actions from './actions';
 import { ImageRoute } from './core/routes';
 import { shutdownToucanCameraServer } from './core/toucan';
+import { openWebLink } from './core/utils';
 
 let sendToRenderer = () => null;
 
@@ -37,8 +38,14 @@ function createWindow() {
   });
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
-    shell.openExternal(details.url);
+    openWebLink(details.url);
     return { action: 'deny' };
+  });
+
+  // The window always shows the app itself; web links go to the browser and anything else is dropped
+  mainWindow.webContents.on('will-navigate', (event, url) => {
+    event.preventDefault();
+    openWebLink(url);
   });
 
   // HMR for renderer base on electron-vite cli.

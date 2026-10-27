@@ -16,7 +16,7 @@ import { assertExtension, assertFrameIndex, assertSafeName, assertTrackId, getPr
 import { createProject, deleteProject, getAudio, getProjectData, getProjectsList, projectSave, saveAudio, savePicture } from './core/projects';
 import { getCameraSettings, getSettings, saveCameraSettings, saveSettings } from './core/settings';
 import { getToucanCameraServerConfig, setToucanCameraServerConfig, stopToucanCameraServer } from './core/toucan';
-import { selectFile, selectFolder } from './core/utils';
+import { openWebLink, selectFile, selectFolder } from './core/utils';
 
 console.log(`💾 Eagle Animation files will be saved in the following folder: ${PROJECTS_PATH}`);
 
@@ -143,7 +143,7 @@ const actions = {
     return getAudio(getProjectPath(project_id), assertTrackId(track_id), filename);
   },
   OPEN_LINK: async (evt, { link }) => {
-    shell.openExternal(link);
+    openWebLink(link);
     return null;
   },
   GET_SETTINGS: async () => {
