@@ -489,5 +489,7 @@
   "Open audio dubbing": "Hangalámondás megnyitása",
   "Microphone": "Mikrofon",
   "Microphone {{index}}": "Mikrofon {{index}}",
-  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Nyilak: mozgás (nyomva tartva folytatódik) • Enter nyomva tartása: felvétel • Szóköz: lejátszás • Z: visszavonás"
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Nyilak: mozgás (nyomva tartva folytatódik) • Enter nyomva tartása: felvétel • Szóköz: lejátszás • Z: visszavonás",
+  "Show on Discord": "Megjelenítés a Discordon",
+  "Show the project you are working on, including its title, on your Discord profile": "Az éppen szerkesztett projekt és annak címe megjelenítése a Discord-profilodon"
 }

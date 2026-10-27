@@ -493,5 +493,7 @@
   "Open audio dubbing": "Atvērt ieskaņošanu",
   "Microphone": "Mikrofons",
   "Microphone {{index}}": "Mikrofons {{index}}",
-  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Bultiņas: pārvietot (turiet, lai turpinātu) • Turiet Enter: ierakstīt • Atstarpe: atskaņot • Z: atsaukt"
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Bultiņas: pārvietot (turiet, lai turpinātu) • Turiet Enter: ierakstīt • Atstarpe: atskaņot • Z: atsaukt",
+  "Show on Discord": "Rādīt Discord",
+  "Show the project you are working on, including its title, on your Discord profile": "Rādīt projektu, pie kura strādājat, ieskaitot tā nosaukumu, jūsu Discord profilā"
 }

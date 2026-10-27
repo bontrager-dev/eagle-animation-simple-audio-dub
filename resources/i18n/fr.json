@@ -512,5 +512,7 @@
   "Open audio dubbing": "Ouvrir le doublage audio",
   "Microphone": "Micro",
   "Microphone {{index}}": "Micro {{index}}",
-  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Flèches : se déplacer (maintenir pour avancer) • Maintenir Entrée : enregistrer • Espace : lecture • Z : annuler"
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Flèches : se déplacer (maintenir pour avancer) • Maintenir Entrée : enregistrer • Espace : lecture • Z : annuler",
+  "Show on Discord": "Afficher sur Discord",
+  "Show the project you are working on, including its title, on your Discord profile": "Afficher le projet sur lequel tu travailles, y compris son titre, sur ton profil Discord"
 }

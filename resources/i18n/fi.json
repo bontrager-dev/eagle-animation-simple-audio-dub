@@ -489,5 +489,7 @@
   "Open audio dubbing": "Avaa äänitys",
   "Microphone": "Mikrofoni",
   "Microphone {{index}}": "Mikrofoni {{index}}",
-  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Nuolet: siirrä (pidä painettuna jatkaaksesi) • Pidä Enteriä: tallenna • Välilyönti: toista • Z: kumoa"
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Nuolet: siirrä (pidä painettuna jatkaaksesi) • Pidä Enteriä: tallenna • Välilyönti: toista • Z: kumoa",
+  "Show on Discord": "Näytä Discordissa",
+  "Show the project you are working on, including its title, on your Discord profile": "Näytä Discord-profiilissasi projekti, jonka parissa työskentelet, sen nimi mukaan lukien"
 }

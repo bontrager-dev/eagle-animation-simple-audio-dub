@@ -498,5 +498,7 @@
   "Open audio dubbing": "Odpri snemanje zvoka",
   "Microphone": "Mikrofon",
   "Microphone {{index}}": "Mikrofon {{index}}",
-  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Puščice: premik (držite za nadaljevanje) • Držite Enter: snemanje • Preslednica: predvajanje • Z: razveljavi"
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Puščice: premik (držite za nadaljevanje) • Držite Enter: snemanje • Preslednica: predvajanje • Z: razveljavi",
+  "Show on Discord": "Prikaži na Discordu",
+  "Show the project you are working on, including its title, on your Discord profile": "Prikaži projekt, na katerem delate, vključno z njegovim naslovom, na svojem profilu Discord"
 }

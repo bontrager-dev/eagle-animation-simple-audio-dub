@@ -510,5 +510,7 @@
   "Open audio dubbing": "Open audio dubbing",
   "Microphone": "Microphone",
   "Microphone {{index}}": "Microphone {{index}}",
-  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo"
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo",
+  "Show on Discord": "Show on Discord",
+  "Show the project you are working on, including its title, on your Discord profile": "Show the project you are working on, including its title, on your Discord profile"
 }

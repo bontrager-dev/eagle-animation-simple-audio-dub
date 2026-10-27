@@ -496,5 +496,7 @@
   "Open audio dubbing": "Otevřít nahrávání zvuku",
   "Microphone": "Mikrofon",
   "Microphone {{index}}": "Mikrofon {{index}}",
-  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Šipky: posun (podržením pokračovat) • Podržte Enter: nahrávání • Mezerník: přehrát • Z: zpět"
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Šipky: posun (podržením pokračovat) • Podržte Enter: nahrávání • Mezerník: přehrát • Z: zpět",
+  "Show on Discord": "Zobrazit na Discordu",
+  "Show the project you are working on, including its title, on your Discord profile": "Zobrazit projekt, na kterém pracujete, včetně jeho názvu, ve vašem profilu na Discordu"
 }

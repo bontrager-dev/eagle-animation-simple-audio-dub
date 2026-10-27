@@ -510,5 +510,7 @@
   "Open audio dubbing": "Otwórz nagrywanie dźwięku",
   "Microphone": "Mikrofon",
   "Microphone {{index}}": "Mikrofon {{index}}",
-  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Strzałki: przesuwanie (przytrzymaj, aby kontynuować) • Przytrzymaj Enter: nagrywanie • Spacja: odtwórz • Z: cofnij"
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Strzałki: przesuwanie (przytrzymaj, aby kontynuować) • Przytrzymaj Enter: nagrywanie • Spacja: odtwórz • Z: cofnij",
+  "Show on Discord": "Pokaż na Discordzie",
+  "Show the project you are working on, including its title, on your Discord profile": "Pokazuj projekt, nad którym pracujesz, wraz z jego tytułem, na swoim profilu Discord"
 }
