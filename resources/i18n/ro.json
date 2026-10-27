@@ -490,6 +490,8 @@
   "Microphone unavailable, only the timing will be recorded": "Microfon indisponibil, se va înregistra doar sincronizarea",
   "Hold to record": "Ține apăsat pentru a înregistra",
   "Undo": "Anulează",
-  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Săgeți: mutare • Ține apăsat Spațiu: înregistrare • Enter: redare • Z: anulare",
-  "Open audio dubbing": "Deschide dublajul audio"
+  "Open audio dubbing": "Deschide dublajul audio",
+  "Microphone": "Microfon",
+  "Microphone {{index}}": "Microfon {{index}}",
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Săgeți: mutare (ține apăsat pentru a continua) • Ține apăsat Enter: înregistrare • Spațiu: redare • Z: anulare"
 }

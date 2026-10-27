@@ -1,7 +1,8 @@
 import Button from '@components/Button';
+import Select from '@components/Select';
 import { DubAudio } from '@core/dubAudio';
 import { computeTakeChanges, getDubFrames, getFrameIndexAtTick, getFrameStarts, MIN_TAKE_DURATION, renderDubAudio } from '@core/dubbing';
-import { GamepadInput, getKeyboardAction, REPEATING_ACTIONS } from '@core/dubInput';
+import { GamepadInput, getKeyboardAction, HoldRepeater, STEP_ACTIONS } from '@core/dubInput';
 import { getPictureLink } from '@core/resize';
 import { encodeWav } from '@core/wav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,7 +25,7 @@ const formatTime = (seconds) => {
   return `${Math.floor(safeSeconds / 60)}:${(safeSeconds % 60).toFixed(1).padStart(4, '0')}`;
 };
 
-const DubbingWindow = ({ t, projectId, trackId, pictures = [], fps = 12, initialFrameId = false, onSaveAudio, onApplyDub, onUndo, onClose }) => {
+const DubbingWindow = ({ t, projectId, trackId, pictures = [], fps = 12, initialFrameId = false, audioInputId = null, onAudioInputChange, onSaveAudio, onApplyDub, onUndo, onClose }) => {
   const frames = useMemo(() => getDubFrames(pictures), [pictures]);
   const starts = useMemo(() => getFrameStarts(frames), [frames]);
   const totalTicks = starts[starts.length - 1] || 0;
@@ -36,6 +37,8 @@ const DubbingWindow = ({ t, projectId, trackId, pictures = [], fps = 12, initial
   const [mode, setMode] = useState('IDLE'); // IDLE, RECORDING, PLAYING, BUSY
   const [micStatus, setMicStatus] = useState('PENDING'); // PENDING, READY, UNAVAILABLE
   const [error, setError] = useState(null);
+  const [inputDevices, setInputDevices] = useState([]);
+  const [inputId, setInputId] = useState(audioInputId);
 
   const audioRef = useRef(null);
   const canvasRef = useRef(null);
@@ -44,28 +47,62 @@ const DubbingWindow = ({ t, projectId, trackId, pictures = [], fps = 12, initial
   const imagesRef = useRef(new Map());
   const takeRef = useRef(null);
   const playRef = useRef(null);
+  const repeaterRef = useRef(new HoldRepeater());
 
   // Event handlers outlive renders, so they read the latest values from here
   const live = useRef({});
   live.current = { frames, starts, index, mode, fps, totalTicks, micStatus };
+
+  // Device labels are only readable once a microphone has been opened
+  const refreshInputDevices = async () => {
+    const devices = await navigator.mediaDevices?.enumerateDevices?.().catch(() => []);
+    setInputDevices((devices || []).filter((device) => device.kind === 'audioinput' && device.deviceId));
+  };
+
+  const openMicrophone = async (audio, deviceId) => {
+    setMicStatus('PENDING');
+    try {
+      // A remembered device that is gone falls back to the default one
+      await audio.openMicrophone(deviceId).catch((err) => (deviceId ? audio.openMicrophone(null) : Promise.reject(err)));
+      if (audio.micReady) {
+        setInputId(audio.deviceId);
+        setMicStatus('READY');
+      }
+    } catch (err) {
+      console.error('Microphone unavailable', err);
+      setMicStatus('UNAVAILABLE');
+    }
+    refreshInputDevices();
+  };
 
   // Audio engine: microphone, playback and decoded takes
   useEffect(() => {
     const audio = new DubAudio();
     audioRef.current = audio;
     audio.resume();
-    audio
-      .openMicrophone()
-      .then(() => setMicStatus('READY'))
-      .catch((err) => {
-        console.error('Microphone unavailable', err);
-        setMicStatus('UNAVAILABLE');
-      });
+    openMicrophone(audio, audioInputId);
+    navigator.mediaDevices?.addEventListener?.('devicechange', refreshInputDevices);
     return () => {
+      navigator.mediaDevices?.removeEventListener?.('devicechange', refreshInputDevices);
       audioRef.current = null;
       audio.close();
     };
   }, []);
+
+  const handleInputChange = (event) => {
+    // Select only styles itself as disabled, so switching mid-take is refused here
+    if (live.current.mode !== 'IDLE') {
+      return;
+    }
+    // Hand Space and Enter back to dubbing instead of the dropdown
+    event.target.blur();
+    const deviceId = event.target.value || null;
+    setInputId(deviceId);
+    if (audioRef.current) {
+      openMicrophone(audioRef.current, deviceId);
+    }
+    onAudioInputChange?.(deviceId);
+  };
 
   // Decode the takes used by this scene ahead of time, so playback starts right away
   useEffect(() => {
@@ -252,8 +289,17 @@ const DubbingWindow = ({ t, projectId, trackId, pictures = [], fps = 12, initial
     setLiveMode('IDLE');
   };
 
-  const handleEvent = ({ action, pressed, time }) => {
+  const handleEvent = ({ action, pressed, time, hold = false }) => {
     const { mode: currentMode, index: currentIndex, frames: currentFrames } = live.current;
+
+    // A held arrow or D-pad direction keeps stepping at the scene framerate
+    if (hold && STEP_ACTIONS.includes(action)) {
+      if (pressed) {
+        repeaterRef.current.press(action, time, live.current.fps);
+      } else {
+        repeaterRef.current.release(action);
+      }
+    }
 
     if (currentMode === 'RECORDING') {
       if (action === 'RECORD' && !pressed) {
@@ -306,18 +352,23 @@ const DubbingWindow = ({ t, projectId, trackId, pictures = [], fps = 12, initial
       }
       event.preventDefault();
       event.stopPropagation();
-      if (pressed && event.repeat && !REPEATING_ACTIONS.includes(action)) {
+      // Holding is handled by HoldRepeater at the scene framerate, not by the OS key repeat
+      if (pressed && event.repeat) {
         return;
       }
-      handleEventRef.current({ action, pressed, time: event.timeStamp || performance.now() });
+      handleEventRef.current({ action, pressed, time: event.timeStamp || performance.now(), hold: true });
     };
     const handleKeyDown = handleKey(true);
     const handleKeyUp = handleKey(false);
+    // Key releases are lost when the window loses focus
+    const handleBlur = () => repeaterRef.current.release();
     window.addEventListener('keydown', handleKeyDown, true);
     window.addEventListener('keyup', handleKeyUp, true);
+    window.addEventListener('blur', handleBlur);
     return () => {
       window.removeEventListener('keydown', handleKeyDown, true);
       window.removeEventListener('keyup', handleKeyUp, true);
+      window.removeEventListener('blur', handleBlur);
     };
   }, []);
 
@@ -326,7 +377,7 @@ const DubbingWindow = ({ t, projectId, trackId, pictures = [], fps = 12, initial
     const gamepad = new GamepadInput();
     let frameRequest = null;
     const loop = (now) => {
-      gamepad.poll(now).forEach((event) => handleEventRef.current(event));
+      [...gamepad.poll(now), ...repeaterRef.current.update(now)].sort((a, b) => a.time - b.time).forEach((event) => handleEventRef.current(event));
 
       const audio = audioRef.current;
       const { mode: currentMode, starts: currentStarts, totalTicks: currentTotal, index: currentIndex, fps: currentFps } = live.current;
@@ -390,6 +441,16 @@ const DubbingWindow = ({ t, projectId, trackId, pictures = [], fps = 12, initial
         <span className={style.title}>{t('Audio dubbing')}</span>
         {isRecording && <span className={style.recordBadge}>{t('Recording')}</span>}
         {isPlaying && <span className={style.playBadge}>{t('Play')}</span>}
+        {inputDevices.length > 0 && (
+          <div className={style.inputSelect} title={t('Microphone')}>
+            <Select
+              value={inputId || ''}
+              onChange={handleInputChange}
+              disabled={mode !== 'IDLE'}
+              options={inputDevices.map((device, i) => ({ value: device.deviceId, label: device.label || t('Microphone {{index}}', { index: i + 1 }) }))}
+            />
+          </div>
+        )}
       </div>
 
       <div className={style.stage}>
@@ -454,7 +515,7 @@ const DubbingWindow = ({ t, projectId, trackId, pictures = [], fps = 12, initial
         <Button icon={faRotate} title={t('Undo')} onClick={() => handleEvent({ action: 'UNDO', pressed: true, time: performance.now() })} disabled={mode !== 'IDLE'} />
       </div>
 
-      <div className={style.hint}>{t('Arrows: move • Hold Space: record • Enter: play • Z: undo')}</div>
+      <div className={style.hint}>{t('Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo')}</div>
     </div>
   );
 };

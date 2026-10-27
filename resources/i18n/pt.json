@@ -503,6 +503,8 @@
   "Microphone unavailable, only the timing will be recorded": "Microfone indisponível, apenas o tempo será gravado",
   "Hold to record": "Manter premido para gravar",
   "Undo": "Desfazer",
-  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Setas: mover • Manter Espaço: gravar • Enter: reproduzir • Z: desfazer",
-  "Open audio dubbing": "Abrir a dobragem de áudio"
+  "Open audio dubbing": "Abrir a dobragem de áudio",
+  "Microphone": "Microfone",
+  "Microphone {{index}}": "Microfone {{index}}",
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Setas: mover (manter premido para continuar) • Manter Enter: gravar • Espaço: reproduzir • Z: desfazer"
 }

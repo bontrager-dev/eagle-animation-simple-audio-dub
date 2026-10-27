@@ -875,6 +875,8 @@ const Animator = ({ t }) => {
                 pictures={pictures}
                 fps={fps}
                 initialFrameId={currentFrameId}
+                audioInputId={settings.AUDIO_INPUT_ID || null}
+                onAudioInputChange={(deviceId) => settingsActions.setSettings({ AUDIO_INPUT_ID: deviceId })}
                 onSaveAudio={(buffer) => projectActions.saveAudio(track, buffer)}
                 onApplyDub={(changes) => {
                   projectActions.applyDub(track, changes);

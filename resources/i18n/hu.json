@@ -486,6 +486,8 @@
   "Microphone unavailable, only the timing will be recorded": "A mikrofon nem érhető el, csak az időzítés lesz rögzítve",
   "Hold to record": "Tartsd lenyomva a felvételhez",
   "Undo": "Visszavonás",
-  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Nyilak: mozgás • Szóköz nyomva tartása: felvétel • Enter: lejátszás • Z: visszavonás",
-  "Open audio dubbing": "Hangalámondás megnyitása"
+  "Open audio dubbing": "Hangalámondás megnyitása",
+  "Microphone": "Mikrofon",
+  "Microphone {{index}}": "Mikrofon {{index}}",
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Nyilak: mozgás (nyomva tartva folytatódik) • Enter nyomva tartása: felvétel • Szóköz: lejátszás • Z: visszavonás"
 }

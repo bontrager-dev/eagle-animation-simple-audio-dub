@@ -493,6 +493,8 @@
   "Microphone unavailable, only the timing will be recorded": "Микрофон недоступен, будет записан только тайминг",
   "Hold to record": "Удерживайте для записи",
   "Undo": "Отменить",
-  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Стрелки: перемещение • Удерживайте Пробел: запись • Enter: воспроизведение • Z: отмена",
-  "Open audio dubbing": "Открыть озвучивание"
+  "Open audio dubbing": "Открыть озвучивание",
+  "Microphone": "Микрофон",
+  "Microphone {{index}}": "Микрофон {{index}}",
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Стрелки: перемещение (удерживайте для продолжения) • Удерживайте Enter: запись • Пробел: воспроизведение • Z: отмена"
 }

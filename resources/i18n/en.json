@@ -507,6 +507,8 @@
   "Microphone unavailable, only the timing will be recorded": "Microphone unavailable, only the timing will be recorded",
   "Hold to record": "Hold to record",
   "Undo": "Undo",
-  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Arrows: move • Hold Space: record • Enter: play • Z: undo",
-  "Open audio dubbing": "Open audio dubbing"
+  "Open audio dubbing": "Open audio dubbing",
+  "Microphone": "Microphone",
+  "Microphone {{index}}": "Microphone {{index}}",
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo"
 }

@@ -486,6 +486,8 @@
   "Microphone unavailable, only the timing will be recorded": "Microfoon niet beschikbaar, alleen de timing wordt opgenomen",
   "Hold to record": "Ingedrukt houden om op te nemen",
   "Undo": "Ongedaan maken",
-  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Pijlen: verplaatsen • Spatie ingedrukt houden: opnemen • Enter: afspelen • Z: ongedaan maken",
-  "Open audio dubbing": "Audio inspreken openen"
+  "Open audio dubbing": "Audio inspreken openen",
+  "Microphone": "Microfoon",
+  "Microphone {{index}}": "Microfoon {{index}}",
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Pijlen: verplaatsen (ingedrukt houden om door te gaan) • Enter ingedrukt houden: opnemen • Spatie: afspelen • Z: ongedaan maken"
 }

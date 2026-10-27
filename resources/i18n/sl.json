@@ -495,6 +495,8 @@
   "Microphone unavailable, only the timing will be recorded": "Mikrofon ni na voljo, posnel se bo le časovni potek",
   "Hold to record": "Držite za snemanje",
   "Undo": "Razveljavi",
-  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Puščice: premik • Držite preslednico: snemanje • Enter: predvajanje • Z: razveljavi",
-  "Open audio dubbing": "Odpri snemanje zvoka"
+  "Open audio dubbing": "Odpri snemanje zvoka",
+  "Microphone": "Mikrofon",
+  "Microphone {{index}}": "Mikrofon {{index}}",
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Puščice: premik (držite za nadaljevanje) • Držite Enter: snemanje • Preslednica: predvajanje • Z: razveljavi"
 }

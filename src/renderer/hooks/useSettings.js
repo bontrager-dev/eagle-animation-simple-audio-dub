@@ -7,6 +7,7 @@ const DEFAULT_SETTINGS = {
   LOOP_SHOW_LIVE: true,
   SKIP_HIDDEN_FRAMES: false,
   CAMERA_ID: null,
+  AUDIO_INPUT_ID: null, // Microphone used by audio dubbing, null for the system default
   CAPTURE_FRAMES: 1,
   AVERAGING_ENABLED: false,
   AVERAGING_VALUE: 3,

@@ -490,6 +490,8 @@
   "Microphone unavailable, only the timing will be recorded": "Mikrofons nav pieejams, tiks ierakstīts tikai laiks",
   "Hold to record": "Turiet, lai ierakstītu",
   "Undo": "Atsaukt",
-  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Bultiņas: pārvietot • Turiet atstarpi: ierakstīt • Enter: atskaņot • Z: atsaukt",
-  "Open audio dubbing": "Atvērt ieskaņošanu"
+  "Open audio dubbing": "Atvērt ieskaņošanu",
+  "Microphone": "Mikrofons",
+  "Microphone {{index}}": "Mikrofons {{index}}",
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Bultiņas: pārvietot (turiet, lai turpinātu) • Turiet Enter: ierakstīt • Atstarpe: atskaņot • Z: atsaukt"
 }

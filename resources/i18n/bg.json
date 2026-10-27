@@ -486,6 +486,8 @@
   "Microphone unavailable, only the timing will be recorded": "Микрофонът не е достъпен, ще се запише само времето",
   "Hold to record": "Задръжте за запис",
   "Undo": "Отмени",
-  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Стрелки: преместване • Задръжте Интервал: запис • Enter: пускане • Z: отмяна",
-  "Open audio dubbing": "Отвори озвучаването"
+  "Open audio dubbing": "Отвори озвучаването",
+  "Microphone": "Микрофон",
+  "Microphone {{index}}": "Микрофон {{index}}",
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Стрелки: преместване (задръжте за продължаване) • Задръжте Enter: запис • Интервал: пускане • Z: отмяна"
 }

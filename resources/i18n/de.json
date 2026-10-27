@@ -500,6 +500,8 @@
   "Microphone unavailable, only the timing will be recorded": "Mikrofon nicht verfügbar, nur das Timing wird aufgenommen",
   "Hold to record": "Gedrückt halten zum Aufnehmen",
   "Undo": "Rückgängig",
-  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Pfeile: bewegen • Leertaste halten: aufnehmen • Enter: abspielen • Z: rückgängig",
-  "Open audio dubbing": "Vertonung öffnen"
+  "Open audio dubbing": "Vertonung öffnen",
+  "Microphone": "Mikrofon",
+  "Microphone {{index}}": "Mikrofon {{index}}",
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Pfeile: bewegen (gedrückt halten zum Weiterlaufen) • Enter halten: aufnehmen • Leertaste: abspielen • Z: rückgängig"
 }

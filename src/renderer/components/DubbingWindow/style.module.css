@@ -196,3 +196,10 @@
     display: none;
   }
 }
+
+.inputSelect {
+  margin-left: auto;
+  margin-right: calc(var(--space-huge) + 1.25rem);
+  max-width: 320px;
+  min-width: 160px;
+}

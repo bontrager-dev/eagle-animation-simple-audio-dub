@@ -486,6 +486,8 @@
   "Microphone unavailable, only the timing will be recorded": "Mikrofonen är inte tillgänglig, bara tidtagningen spelas in",
   "Hold to record": "Håll ned för att spela in",
   "Undo": "Ångra",
-  "Arrows: move • Hold Space: record • Enter: play • Z: undo": "Pilar: flytta • Håll ned Mellanslag: spela in • Enter: spela upp • Z: ångra",
-  "Open audio dubbing": "Öppna ljudinspelning"
+  "Open audio dubbing": "Öppna ljudinspelning",
+  "Microphone": "Mikrofon",
+  "Microphone {{index}}": "Mikrofon {{index}}",
+  "Arrows: move (hold to keep going) • Hold Enter: record • Space: play • Z: undo": "Pilar: flytta (håll ned för att fortsätta) • Håll ned Enter: spela in • Mellanslag: spela upp • Z: ångra"
 }
