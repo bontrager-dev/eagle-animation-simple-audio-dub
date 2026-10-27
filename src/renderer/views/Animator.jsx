@@ -1,6 +1,7 @@
 import CameraSettingsWindow from '@components/CameraSettingsWindow';
 import ControlBar from '@components/ControlBar';
 import DesktopNavigation from '@components/DesktopNavigation';
+import DubbingWindow from '@components/DubbingWindow';
 import ImportOverlay from '@components/ImportOverlay';
 import KeyboardHandler from '@components/KeyboardHandler';
 import LimitWarning from '@components/LimitWarning';
@@ -31,6 +32,7 @@ import faEllipsisVertical from '@icons/faEllipsisVertical';
 import faEraser from '@icons/faEraser';
 import faFolder from '@icons/faFolder';
 import faImage from '@icons/faImage';
+import faMicrophone from '@icons/faMicrophone';
 import faPlay from '@icons/faPlay';
 import faSliders from '@icons/faSliders';
 import faStop from '@icons/faStop';
@@ -259,6 +261,8 @@ const Animator = ({ t }) => {
   const framePosition = currentFrameId === false ? false : pictures.findIndex((p) => p.id === currentFrameId) + 1 || 1;
   const currentFrame = currentFrameId === false ? false : pictures.find((p) => p.id === currentFrameId) || false;
   const totalAnimationFrames = pictures.reduce((acc, e) => acc + (!e.deleted && !e.hidden ? e.length || 1 : 0), 0);
+  const hasAudioDubbing = appCapabilities.includes('AUDIO_DUBBING');
+  const canUseAudioDubbing = hasAudioDubbing && pictures.some((e) => !e.hidden);
 
   const visibleScenes = project.scenes.map((s, index) => ({ ...s, index })).filter((s) => !s.deleted);
   const editingScene = project.scenes[sceneEditingIndex] || null;
@@ -573,6 +577,12 @@ const Animator = ({ t }) => {
     MASKING_EDITOR: () => {
       setActiveWindow('masking');
     },
+    AUDIO_DUBBING: () => {
+      if (canUseAudioDubbing && !isPlaying) {
+        setActiveWindow('dubbing');
+        window.track('audio_dubbing_opened', { projectId: `${id}`, trackId: `${track}` });
+      }
+    },
   };
 
   const handlePlayerInit = (setStream) => {
@@ -614,6 +624,14 @@ const Animator = ({ t }) => {
     }, 0);
   };
 
+  const handleCloseDubbing = () => {
+    setActiveWindow(null);
+    // Force player sync, frame lengths may have changed
+    setTimeout(() => {
+      playerRef.current.showFrame(currentFrameId);
+    }, 0);
+  };
+
   const frameCaptureMode = maskingMode !== 'DISABLED' && !isPlaying ? (pendingBackgroundFrame ? 'FOREGROUND' : 'BACKGROUND') : null;
   const canExport =
     pictures?.some((e) => !e?.hidden) &&
@@ -632,6 +650,7 @@ const Animator = ({ t }) => {
       onClick: handleAction.bind(null, currentFrame === false || isPlaying ? 'SHOW_TOOLS' : 'SHOW_PICTURE_OPTIONS'),
       disabled: isPlaying,
     },
+    ...(hasAudioDubbing ? [{ title: t('Audio dubbing'), icon: faMicrophone, onClick: handleAction.bind(null, 'AUDIO_DUBBING'), disabled: isPlaying || !canUseAudioDubbing }] : []),
   ];
 
   const mobileActionsMiddle = [
@@ -746,6 +765,8 @@ const Animator = ({ t }) => {
             frameQuantity={pictures.length}
             isCurrentFrameHidden={!!currentFrame.hidden}
             canUseMaskingEditor={!!currentFrame.masking}
+            showAudioDubbing={hasAudioDubbing}
+            canUseAudioDubbing={canUseAudioDubbing}
             totalAnimationFrames={totalAnimationFrames}
             maskingMode={maskingMode}
           />
@@ -843,6 +864,24 @@ const Animator = ({ t }) => {
                 backgroundLayer={currentFrame?.masking?.background?.link || null}
                 foregroundLayer={currentFrame?.masking?.foreground?.link || null}
                 transparentLayer={currentFrame?.masking?.transparent?.link || null}
+              />
+            )}
+          </Window>
+          <Window isOpened={activeWindow === 'dubbing'} onClose={handleCloseDubbing} isFullScreen={true}>
+            {activeWindow === 'dubbing' && (
+              <DubbingWindow
+                projectId={id}
+                trackId={Number(track)}
+                pictures={pictures}
+                fps={fps}
+                initialFrameId={currentFrameId}
+                onSaveAudio={(buffer) => projectActions.saveAudio(track, buffer)}
+                onApplyDub={(changes) => {
+                  projectActions.applyDub(track, changes);
+                  window.track('audio_dubbing_recorded', { projectId: `${id}`, trackId: `${track}`, nbFrames: changes.length });
+                }}
+                onUndo={() => projectActions.undo()}
+                onClose={handleCloseDubbing}
               />
             )}
           </Window>

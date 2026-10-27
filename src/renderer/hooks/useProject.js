@@ -367,6 +367,44 @@ function useProject(options) {
     [projectId, actionSavePicture]
   );
 
+  // Action save audio take
+  const actionSaveAudio = useCallback(
+    async (trackId, buffer, extension = 'wav') => {
+      return window.EA('SAVE_AUDIO', {
+        project_id: projectId,
+        track_id: Number(trackId),
+        buffer: Buffer.from(buffer),
+        extension,
+      });
+    },
+    [projectId]
+  );
+
+  // Action apply a dubbing take: new lengths and audio slices for several frames, as one undo step
+  const actionApplyDub = useCallback(async (trackId, changes = []) => {
+    const sceneId = Number(trackId);
+    const changesById = new Map(changes.map((change) => [`${change.id}`, change]));
+    setProjectData((oldData) => {
+      let d = structuredClone(oldData);
+      if (d.project.scenes[sceneId]) {
+        d.project.scenes[sceneId].pictures = d.project.scenes[sceneId].pictures.map((p) => {
+          const change = changesById.get(`${p.id}`);
+          if (!change) {
+            return p;
+          }
+          const updated = { ...p, length: Math.min(MAX_FRAME_DUPLICATION, Math.max(1, Math.round(change.length) || 1)) };
+          if (change.audio) {
+            updated.audio = change.audio;
+          } else {
+            delete updated.audio;
+          }
+          return updated;
+        });
+      }
+      return d;
+    });
+  }, []);
+
   // Action Undo
   const actionUndo = useCallback(() => {
     const prev = historyUndo();
@@ -395,6 +433,8 @@ function useProject(options) {
       addFrame: actionAddFrame,
       savePicture: actionSavePicture,
       updateFrame: actionUpdateFrame,
+      saveAudio: actionSaveAudio,
+      applyDub: actionApplyDub,
       addScene: actionAddScene,
       renameScene: actionRenameScene,
       deleteScene: actionDeleteScene,

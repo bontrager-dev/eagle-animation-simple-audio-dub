@@ -17,6 +17,7 @@ import faFrame from '@icons/faFrame';
 import faImage from '@icons/faImage';
 import faImageCircleMinus from '@icons/faImageCircleMinus';
 import faImageCirclePlus from '@icons/faImageCirclePlus';
+import faMicrophone from '@icons/faMicrophone';
 import faPen from '@icons/faPen';
 import faPlay from '@icons/faPlay';
 import faSliders from '@icons/faSliders';
@@ -53,6 +54,8 @@ const ControlBar = ({
   canDeduplicate = false,
   canDuplicate = true,
   canUseMaskingEditor = false,
+  showAudioDubbing = false,
+  canUseAudioDubbing = false,
   isCurrentFrameHidden = false,
   showCameraSettings = false,
   onAction = null,
@@ -165,7 +168,7 @@ const ControlBar = ({
           <CustomSlider step={0.01} min={0} max={1} value={onionValue} onChange={differenceStatus || framePosition !== false ? () => {} : (value) => handleAction('ONION_CHANGE', value)()} />
         </div>
       </div>
-      <div className={`${style.subcontainer} ${style.center}`}>
+      <div className={`${style.subcontainer} ${style.center} ${showAudioDubbing ? style.centerWide : ''}`}>
         <Button
           title={t('Camera settings')}
           selected={showCameraSettings}
@@ -185,6 +188,7 @@ const ControlBar = ({
           icon={faEraser}
           disabled={isPlaying}
         />
+        {showAudioDubbing && <Button title={t('Audio dubbing')} onClick={handleAction('AUDIO_DUBBING')} size="mini" icon={faMicrophone} disabled={isPlaying || !canUseAudioDubbing} />}
       </div>
       <div className={`${style.subcontainer} ${style.right}`}>
         <Button

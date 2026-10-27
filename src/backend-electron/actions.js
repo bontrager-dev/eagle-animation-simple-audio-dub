@@ -12,7 +12,7 @@ import { uploadFile } from './core/api';
 import { clearCache, getCacheSize } from './core/cache';
 import { setDiscordActivity } from './core/discord';
 import { exportProjectScene, exportSaveTemporaryBuffer, getSyncList, saveSyncList } from './core/export';
-import { createProject, deleteProject, getProjectData, getProjectsList, projectSave, savePicture } from './core/projects';
+import { createProject, deleteProject, getAudio, getProjectData, getProjectsList, projectSave, saveAudio, savePicture } from './core/projects';
 import { getCameraSettings, getSettings, saveCameraSettings, saveSettings } from './core/settings';
 import { getToucanCameraServerConfig, setToucanCameraServerConfig, stopToucanCameraServer } from './core/toucan';
 import { selectFile, selectFolder } from './core/utils';
@@ -128,6 +128,12 @@ const actions = {
       metaLink: getMetaPictureLink(data._id, track_id, picture.filename),
     };
   },
+  SAVE_AUDIO: async (evt, { project_id, track_id, buffer, extension = 'wav' }) => {
+    return saveAudio(join(PROJECTS_PATH, project_id), track_id, extension, buffer);
+  },
+  GET_AUDIO: async (evt, { project_id, track_id, filename }) => {
+    return getAudio(join(PROJECTS_PATH, project_id), track_id, filename);
+  },
   OPEN_LINK: async (evt, { link }) => {
     shell.openExternal(link);
     return null;
@@ -188,6 +194,7 @@ const actions = {
       'SHORTCUTS',
       'LOCAL_DATA_FOLDER',
       'CLEAR_CACHE',
+      'AUDIO_DUBBING',
     ];
     return capabilities;
   },
@@ -246,6 +253,7 @@ const actions = {
       framerate = 10,
       endpoint = null,
       email = null,
+      audio_buffer_id = null,
     },
     sendToRenderer
   ) => {
@@ -280,6 +288,7 @@ const actions = {
         customOutputFramerate: custom_output_framerate,
         customOutputFramerateNumber: custom_output_framerate_number,
         framerate: Number(framerate),
+        audioBufferId: audio_buffer_id,
       },
       (progress) => sendToRenderer('FFMPEG_PROGRESS', { progress })
     );

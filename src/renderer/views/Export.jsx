@@ -13,6 +13,8 @@ import PageLayout from '@components/PageLayout';
 import Select from '@components/Select';
 import Switch from '@components/Switch';
 import { ALLOWED_LETTERS } from '@config-web';
+import { renderExportAudio } from '@core/dubAudio';
+import { hasDubAudio } from '@core/dubbing';
 import { ExportFrames } from '@core/Export';
 import { parseRatio } from '@core/ratio';
 import useAppCapabilities from '@hooks/useAppCapabilities';
@@ -20,11 +22,13 @@ import useDiscordActivity from '@hooks/useDiscordActivity';
 import useProject from '@hooks/useProject';
 import useSettings from '@hooks/useSettings';
 import faArrowLeft from '@icons/faArrowLeft';
+import { Buffer } from 'buffer';
 import pLimit from 'p-limit';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { withTranslation } from 'react-i18next';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { v4 } from 'uuid';
 
 const GetFrameResolutionsLimit = pLimit(10);
 
@@ -317,6 +321,14 @@ const Export = ({ t }) => {
     // Compute all frames
     const frames = await ExportFrames(id, Number(track), files, exportSettings, (p) => setFrameRenderingProgress(p), createBuffer, createBufferFromUrl);
 
+    // Dubbed sound, rendered against the frames actually exported so holds and duplicated frames stay in sync
+    let audioBufferId = null;
+    if (data.mode !== 'frames' && appCapabilities.includes('AUDIO_DUBBING') && hasDubAudio(files)) {
+      const wav = await renderExportAudio({ projectId: id, trackId: Number(track), exportedFrames: frames, pictures: files, fps: project?.scenes?.[Number(track)]?.framerate });
+      audioBufferId = v4();
+      await createBuffer(audioBufferId, Buffer.from(wav));
+    }
+
     // Save frames / video on the disk
     await window.EA('EXPORT', {
       frames: frames.map(({ mimeType, bufferId, ...e }) => ({ ...e, buffer_id: bufferId, mime_type: mimeType })),
@@ -337,6 +349,7 @@ const Export = ({ t }) => {
       public_code: data.mode === 'send' && data.sendMethod === 'code' ? newCode : '',
       event_key: settings.EVENT_KEY,
       exportMaskingLayers: !!data?.exportMaskingLayers,
+      audio_buffer_id: audioBufferId,
     });
 
     setIsExporting(false);

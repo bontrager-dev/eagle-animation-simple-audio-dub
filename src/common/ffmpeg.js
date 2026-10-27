@@ -3,28 +3,33 @@ import { DEFAULT_FPS } from '../config';
 const profiles = {
   h264: {
     codec: 'libx264',
+    audioCodec: 'aac',
     extension: 'mp4',
     pix_fmt: 'yuv420p',
     preset: 'faster',
   },
   hevc: {
     codec: 'libx265',
+    audioCodec: 'aac',
     extension: 'mp4',
     pix_fmt: 'yuv420p',
     preset: 'faster',
   },
   prores: {
     codec: 'prores_ks',
+    audioCodec: 'pcm_s16le',
     extension: 'mov',
     pix_fmt: 'yuva444p10le',
   },
   vp8: {
     codec: 'libvpx',
+    audioCodec: 'libopus',
     extension: 'webm',
     pix_fmt: 'yuv420p',
   },
   vp9: {
     codec: 'libvpx-vp9',
+    audioCodec: 'libopus',
     extension: 'webm',
     pix_fmt: 'yuv420p',
   },
@@ -69,6 +74,14 @@ export const getFFmpegArgs = (encodingProfile = false, outputFile = false, fps =
 
   // Add all images in the path
   args.push('-i', 'frame-%06d.jpg');
+
+  // Dubbed audio track, rendered to the exact length of the animation
+  if (opts.audioFile) {
+    args.push('-i', opts.audioFile, '-map', '0:v', '-map', '1:a', '-c:a', profile.audioCodec);
+    if (!profile.audioCodec.startsWith('pcm')) {
+      args.push('-b:a', '192k');
+    }
+  }
 
   // Codec
   args.push('-c:v', profile.codec);

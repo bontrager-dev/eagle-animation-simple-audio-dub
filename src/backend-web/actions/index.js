@@ -2,6 +2,7 @@ import { isIos } from '@braintree/browser-detection';
 import { getEncodingProfile, getFFmpegArgs, parseFFmpegLogs } from '@common/ffmpeg';
 import { LS_CAMERA_SETTINGS, LS_SETTINGS } from '@config-web';
 import { extensionToMimeType } from '@core/frameTypes';
+import { decodeWav } from '@core/wav';
 import { fetchFile } from '@ffmpeg/util';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
@@ -9,9 +10,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { createBuffer, flushBuffers, getBuffer } from './buffer';
 import { getFFmpeg } from './ffmpeg';
-import { createFrame } from './frames';
+import { createFrame, getFrameBlob } from './frames';
 import { createProject, deleteProject, getAllProjects, getProject, saveProject } from './projects';
-import { exportWithWebCodecs, isWebCodecsAvailable } from './webcodecs';
+import { exportWithWebCodecs, isWebCodecsAudioAvailable, isWebCodecsAvailable } from './webcodecs';
 
 let events = [];
 let currentDirectory = null;
@@ -148,6 +149,15 @@ export const Actions = {
       metaLink: `/api/pictures/${filename}?infos=json`,
     };
   },
+  // Audio takes share the frames blob store, keyed by the same kind of id
+  SAVE_AUDIO: async (evt, { buffer, extension = 'wav' }) => {
+    const audioId = await createFrame(buffer, extension);
+    return { filename: `${audioId}.${extension}` };
+  },
+  GET_AUDIO: async (evt, { filename }) => {
+    const blob = await getFrameBlob(`${filename}`.split('.')[0]);
+    return blob ? new Uint8Array(await blob.arrayBuffer()) : null;
+  },
   GET_SETTINGS: async () => {
     try {
       return {
@@ -189,7 +199,7 @@ export const Actions = {
     return [];
   },
   APP_CAPABILITIES: async () => {
-    const capabilities = ['SHORTCUTS', 'EXPORT_VIDEO', 'EXPORT_VIDEO_H264', 'EXPORT_VIDEO_VP8', 'EXPORT_VIDEO_PRORES', 'EXPORT_FRAMES', 'EXPORT_FRAMES_ZIP'];
+    const capabilities = ['SHORTCUTS', 'EXPORT_VIDEO', 'EXPORT_VIDEO_H264', 'EXPORT_VIDEO_VP8', 'EXPORT_VIDEO_PRORES', 'EXPORT_FRAMES', 'EXPORT_FRAMES_ZIP', 'AUDIO_DUBBING'];
     if (await isWebCodecsAvailable('hevc')) capabilities.push('EXPORT_VIDEO_HEVC');
     if (await isWebCodecsAvailable('vp9')) capabilities.push('EXPORT_VIDEO_VP9');
     if (!isIos()) {
@@ -231,6 +241,7 @@ export const Actions = {
       compress_as_zip = false,
       custom_output_framerate_number = 10,
       endpoint = null, //eslint-disable-line no-unused-vars
+      audio_buffer_id = null,
     }
   ) => {
     const trackId = Number(track_id);
@@ -282,7 +293,9 @@ export const Actions = {
       // custom output framerate only changes the rate of the video file itself.
       const animationFps = project.project.scenes[trackId].framerate;
       const outputFps = custom_output_framerate && custom_output_framerate_number ? Math.max(animationFps, Number(custom_output_framerate_number)) : animationFps;
-      const useWebCodecs = await isWebCodecsAvailable(format);
+      const audioBlob = audio_buffer_id ? await getBuffer(audio_buffer_id) : null;
+      // Without an encoder for the sound, ffmpeg.wasm (which brings its own) does the whole export
+      const useWebCodecs = (await isWebCodecsAvailable(format)) && (!audioBlob || (await isWebCodecsAudioAvailable(format)));
 
       if (useWebCodecs) {
         const frameBuffers = [];
@@ -291,9 +304,17 @@ export const Actions = {
           frameBuffers.push({ buffer });
         }
 
-        const result = await exportWithWebCodecs(frameBuffers, format, animationFps, outputFps, (progress) => {
-          sendEvent('FFMPEG_PROGRESS', { progress });
-        });
+        const audio = audioBlob ? decodeWav(await audioBlob.arrayBuffer()) : null;
+        const result = await exportWithWebCodecs(
+          frameBuffers,
+          format,
+          animationFps,
+          outputFps,
+          (progress) => {
+            sendEvent('FFMPEG_PROGRESS', { progress });
+          },
+          audio
+        );
 
         saveAs(new Blob([result.buffer], { type: result.mimeType }), result.filename);
       } else {
@@ -310,12 +331,17 @@ export const Actions = {
           await ffmpeg.writeFile(`frame-${frame.index.toString().padStart(6, '0')}.${frame.extension}`, await fetchFile(new Blob([buffer])));
         }
 
+        if (audioBlob) {
+          await ffmpeg.writeFile('audio.wav', await fetchFile(audioBlob));
+        }
+
         const profile = getEncodingProfile(format);
         const output = `video.${profile.extension}`;
 
         const args = getFFmpegArgs(format, output, project.project.scenes[trackId].framerate, {
           customOutputFramerate: custom_output_framerate,
           customOutputFramerateNumber: custom_output_framerate_number,
+          audioFile: audioBlob ? 'audio.wav' : null,
         });
 
         console.log(`🎞️ FFmpeg ${args.map((e) => `"${e}"`).join(' ')}`);

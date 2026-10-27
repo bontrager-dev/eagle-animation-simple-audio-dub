@@ -35,5 +35,8 @@ export const extensionToMimeType = (ext) => {
   if (parsedExt === 'svg') {
     return 'image/svg';
   }
+  if (parsedExt === 'wav') {
+    return 'audio/wav';
+  }
   return 'application/octet-stream';
 };
