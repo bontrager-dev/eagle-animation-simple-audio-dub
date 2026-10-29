@@ -58,6 +58,21 @@ export const renderExportAudio = async ({ projectId, trackId, exportedFrames, pi
 // Audio kept before a take starts, so latency compensation can reach slightly into the past
 const PRE_ROLL_SECONDS = 1;
 
+// The record button's click lands at the start of a take, so that much is silenced (timing is kept).
+// A short fade back in keeps the cut itself from clicking.
+const START_MUTE_SECONDS = 0.08;
+const START_FADE_SECONDS = 0.01;
+
+const muteTakeStart = (samples, sampleRate) => {
+  const muted = Math.min(samples.length, Math.round(START_MUTE_SECONDS * sampleRate));
+  const fade = Math.round(START_FADE_SECONDS * sampleRate);
+  samples.fill(0, 0, muted);
+  for (let i = 0; i < fade && muted + i < samples.length; i++) {
+    samples[muted + i] *= i / fade;
+  }
+  return samples;
+};
+
 export class DubAudio {
   constructor() {
     this.context = new AudioContext({ latencyHint: 'interactive' });
@@ -187,7 +202,7 @@ export class DubAudio {
       }
     }
     this.takeStart = null;
-    return samples;
+    return muteTakeStart(samples, this.sampleRate);
   }
 
   cancelTake() {
