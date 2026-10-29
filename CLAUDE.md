@@ -257,7 +257,7 @@ A microphone dropdown in the header saves its choice to the `AUDIO_INPUT_ID` set
 
 **How a take works:**
 1. While record is held, the mic is captured by an AudioWorklet loaded from a `blob:` URL (the Electron CSP allows `blob:` for this). Each step taken while recording marks a frame boundary, timestamped against the audio clock. The mic's reported input latency is subtracted, and a one-second pre-roll lets that correction reach just before the press.
-2. On release, the take is encoded as mono 16-bit WAV (`wav.js`) and saved with `SAVE_AUDIO`.
+2. On release, the first 80 ms of the take are silenced so the record button's click is not heard (frame timing is unchanged). The take is then encoded as mono 16-bit WAV (`wav.js`) and saved with `SAVE_AUDIO`.
 3. `computeTakeChanges` (`dubbing.js`) snaps the boundaries to scene ticks. `useProject().applyDub` then writes the new lengths and audio slices as **one undo step**. Recording over frames that already have audio replaces it.
 
 **Data model:** `picture.length` is the frame's duration in ticks at `scene.framerate` (1 to `MAX_FRAME_DUPLICATION`). `picture.audio = { filename, offset, duration }` points to a slice of a take, with offset and duration in seconds. Deleted and hidden frames are skipped.
